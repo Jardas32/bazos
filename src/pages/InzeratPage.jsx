@@ -30,7 +30,7 @@ function InzeratPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `http://localhost:4000/api/subcategories/category/${slug}`
+          `https://bazos-yihu.onrender.com/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
@@ -47,7 +47,7 @@ function InzeratPage() {
     const getAdsbyId = async () => {
       try {
         const resAdsId = await fetch(
-          `http://localhost:4000/api/ads/inzerat/${id}`
+          `https://bazos-yihu.onrender.com/api/ads/inzerat/${id}`
         );
 
         const dataAdsId = await resAdsId.json();

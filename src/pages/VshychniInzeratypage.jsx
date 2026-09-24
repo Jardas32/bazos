@@ -11,7 +11,7 @@ function VshychniInzeratypage() {
     const getAllinzeratUser = async () => {
       try {
         const res = await fetch(
-          `http://localhost:4000/api/ads/allinzerat/${user_id}`,
+          `https://bazos-yihu.onrender.com/api/ads/allinzerat/${user_id}`,
           {
             method: "GET",
             credentials: "include",
@@ -55,7 +55,9 @@ function VshychniInzeratypage() {
       <div className="wrapper-hodnoceni-rightbar">
         <div className="wrapper-hodnoceni-top">Uživatel: {name}</div>
 
-        <h3 className="text-vshechni">Všechny inzeráty uživatele {alladsuser.length}</h3>
+        <h3 className="text-vshechni">
+          Všechny inzeráty uživatele {alladsuser.length}
+        </h3>
 
         <div className="wrapper-alladsuser-grids">
           {alladsuser.map((ad) => (

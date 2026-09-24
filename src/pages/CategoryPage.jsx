@@ -48,9 +48,9 @@ function CategoryPage() {
         let url;
 
         if (subcategoryslug) {
-          url = `http://localhost:4000/api/ads/subcategory/${subcategoryslug}`;
+          url = `https://bazos-yihu.onrender.com/api/ads/subcategory/${subcategoryslug}`;
         } else {
-          url = `http://localhost:4000/api/ads/category/${slug}`;
+          url = `https://bazos-yihu.onrender.com/api/ads/category/${slug}`;
         }
 
         const resAds = await fetch(url);

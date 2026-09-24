@@ -26,7 +26,7 @@ function SubcategoryPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `http://localhost:4000/api/subcategories/category/${slug}`
+          `https://bazos-yihu.onrender.com/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
@@ -46,9 +46,9 @@ function SubcategoryPage() {
         let url;
 
         if (subcategoryslug) {
-          url = `http://localhost:4000/api/ads/subcategory/${subcategoryslug}`;
+          url = `https://bazos-yihu.onrender.com/api/ads/subcategory/${subcategoryslug}`;
         } else {
-          url = `http://localhost:4000/api/ads/category/${slug}`;
+          url = `https://bazos-yihu.onrender.com/api/ads/category/${slug}`;
         }
 
         const resAds = await fetch(url);
