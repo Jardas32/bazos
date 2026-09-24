@@ -11,17 +11,9 @@ import favoritRouter from "./routers/favorites.js";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173", "https://jardas32.github.io"];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "https://jardas32.github.io",
     credentials: true,
   })
 );
