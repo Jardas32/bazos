@@ -1,5 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+const API_URL = "https://bazos-yihu.onrender.com";
+
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
@@ -69,7 +71,7 @@ function BazosContext({ children }) {
     });
 
     try {
-      const res = await fetch("http://localhost:4000/api/ads/inzerat/add", {
+      const res = await fetch(`${API_URL}/api/ads/inzerat/add`, {
         method: "POST",
         credentials: "include",
         body: formData,
@@ -98,13 +100,10 @@ function BazosContext({ children }) {
     if (!id) return;
 
     try {
-      const res = await fetch(
-        `http://localhost:4000/api/ads/inzerat/delete/${id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${API_URL}/api/ads/inzerat/delete/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
 
       if (res.ok) {
         getMyAds();
@@ -119,13 +118,10 @@ function BazosContext({ children }) {
       const inFavorites = myFavorites.some((f) => f.id === id);
 
       if (inFavorites) {
-        const res = await fetch(
-          `http://localhost:4000/api/favorites/delete/${id}`,
-          {
-            method: "DELETE",
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`${API_URL}/api/favorites/delete/${id}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
 
         const data = await res.json();
 
@@ -163,13 +159,10 @@ function BazosContext({ children }) {
     }
 
     try {
-      const res = await fetch(
-        "http://localhost:4000/api/favorites/my_favorites",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${API_URL}/api/favorites/my_favorites`, {
+        method: "GET",
+        credentials: "include",
+      });
 
       const data = await res.json();
 
@@ -188,7 +181,7 @@ function BazosContext({ children }) {
     if (!isAuth) return;
 
     try {
-      const res = await fetch(`http://localhost:4000/api/ads/my_ads`, {
+      const res = await fetch(`${API_URL}/api/ads/my_ads`, {
         method: "GET",
         credentials: "include",
       });
@@ -209,7 +202,7 @@ function BazosContext({ children }) {
   useEffect(() => {
     const authMe = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/auth/me`, {
+        const res = await fetch(`${API_URL}/api/auth/me`, {
           method: "GET",
           credentials: "include",
         });
@@ -239,7 +232,7 @@ function BazosContext({ children }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:4000/api/auth/register`, {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -279,7 +272,7 @@ function BazosContext({ children }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:4000/api/auth/login`, {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -310,7 +303,7 @@ function BazosContext({ children }) {
 
   const logout = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/auth/logout`, {
+      const res = await fetch(`${API_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
@@ -327,7 +320,7 @@ function BazosContext({ children }) {
 
   const deleteAcount = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/auth/delete-acount`, {
+      const res = await fetch(`${API_URL}/api/auth/delete-acount`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -342,6 +335,7 @@ function BazosContext({ children }) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     const getAllcategories = async () => {
       try {
@@ -391,7 +385,7 @@ function BazosContext({ children }) {
     const subcategories = async () => {
       try {
         const res = await fetch(
-          `http://localhost:4000/api/subcategories/category/${selectSekce}`
+          `${API_URL}/api/subcategories/category/${selectSekce}`
         );
 
         const data = await res.json();

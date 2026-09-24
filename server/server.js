@@ -29,8 +29,10 @@ app.use("/api/ads", adsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/favorites", favoritRouter);
 
-app.use("/", (req, res) => {
-  res.json({ message: "Bazos API is working" });
+app.get("/", (req, res) => {
+  res.json({
+    message: "Bazos API is working",
+  });
 });
 
 const PORT = process.env.PORT || 4000;
