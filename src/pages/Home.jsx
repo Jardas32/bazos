@@ -9,7 +9,7 @@ function Home() {
     const getCategories = async () => {
       try {
         const resCategories = await fetch(
-          "http://localhost:4000/api/categories"
+          "https://bazos-yihu.onrender.com/api/categories"
         );
 
         if (!resCategories.ok) {
