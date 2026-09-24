@@ -349,6 +349,8 @@ function BazosContext({ children }) {
 
         const dataCategories = await res.json();
 
+        console.log(dataCategories);
+
         const categoriesWithIcons = dataCategories.map((category) => {
           if (category.slug === "auto") {
             return { ...category, icon: "./images/auto.svg" };
@@ -371,8 +373,6 @@ function BazosContext({ children }) {
 
         setSubCategories(categoriesWithIcons);
         setLeftBarCategories(categoriesWithIcons);
-
-        console.log(dataCategories);
       } catch (err) {
         console.error("Chyba při načítání kategorií:", err);
       }
