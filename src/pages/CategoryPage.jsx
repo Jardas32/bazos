@@ -26,7 +26,7 @@ function CategoryPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `http://localhost:4000/api/subcategories/category/${slug}`
+          `https://bazos-yihu.onrender.com/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
