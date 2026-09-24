@@ -1,0 +1,142 @@
+.wrapper-vyber-sekce-forms {
+  background-color: rgba(255, 68, 0, 0.21);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.formAds {
+  max-width: 320px;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.gropuFormAds {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 3px;
+}
+
+.select-files {
+  display: none;
+}
+
+.gropuFormAds {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Полностью скрываем input */
+.select-files {
+  display: none;
+}
+
+/* Красивая кнопка */
+.btn-select-file {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: #f58220;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-select-file:hover {
+  background: #e66f0a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-select-file:active {
+  transform: scale(0.97);
+}
+
+.file-hint {
+  color: #777;
+  font-size: 13px;
+}
+
+.gropuFormAds span {
+  color: rgb(84, 84, 84);
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gropuFormAds input {
+  width: 100%;
+  transition: all 0.3s;
+  outline: none;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.gropuFormAds input:focus {
+  border: 1px solid orangered;
+}
+
+.ads-description {
+  outline: none;
+  width: 100%;
+  resize: vertical;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ads-description:focus {
+  border: 1px solid orangered;
+}
+
+.status {
+  color: red;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-pridat {
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.btn-pridat:hover {
+  background-color: orangered;
+}
+
+@media (max-width: 775px) {
+  .wrapper-vyber-sekce-forms {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 693px) {
+  .wrapper-vyber-sekce-forms {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

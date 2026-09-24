@@ -1,0 +1,16 @@
+.wrapper-home {
+  padding: 30px 20px;
+}
+
+.wrapper-grids {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  justify-content: center;
+  gap: 5px;
+}
+
+@media (max-width: 533px) {
+  .wrapper-home {
+    padding: 10px;
+  }
+}

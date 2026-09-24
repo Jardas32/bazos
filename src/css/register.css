@@ -1,0 +1,108 @@
+.wrapper-registerbg {
+  background-color: rgba(255, 68, 0, 0.21);
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.nova-registrace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.btn-loginpage {
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.btn-loginpage:hover {
+  background-color: orangered;
+}
+
+.register-info {
+  font-size: 14px;
+}
+
+.register-infoauth {
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.formRegister {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.groupInputSouhlas {
+  margin-bottom: 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.groupInputSouhlas a {
+  transition: all 0.3s;
+  text-decoration: none;
+  color: rgb(166, 8, 8);
+}
+
+.groupInputSouhlas a:hover {
+  text-decoration: underline;
+}
+
+.groupInputregister {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 3px;
+}
+
+.placeholder {
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+}
+
+.groupInputregister input {
+  transition: all 0.3s;
+  padding: 5px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.groupInputregister input:focus {
+  border: 1px solid orangered;
+}
+
+.btn-register {
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.btn-register:hover {
+  background-color: orangered;
+}

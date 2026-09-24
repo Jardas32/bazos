@@ -1,0 +1,195 @@
+.wrapper-mojeinzeraty {
+  width: 100%;
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+}
+
+.wrapper-profile-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.wrapper-delete-acount {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-odhlasitse,
+.btn-delete-acount {
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.btn-odhlasitse:hover {
+  background-color: orangered;
+}
+
+.btn-delete-acount:hover {
+  background-color: orangered;
+}
+
+.profile {
+  padding-left: 20px;
+  border-left: 1.5px dotted rgb(215, 215, 215);
+}
+
+.uzivatel {
+  margin-top: 20px;
+}
+
+.profile-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-group span:nth-child(1) {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+.profile-group span:nth-child(2) {
+  font-size: 14px;
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.logout {
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.logout:hover {
+  background-color: red;
+}
+
+.prihlasitse {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(255, 68, 0, 0.714);
+  color: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.prihlasitse:hover {
+  background-color: orangered;
+}
+
+.btn-register:hover {
+  background-color: orangered;
+}
+
+.nejste-prihlaseni {
+  margin-top: 30px;
+  text-align: center;
+  color: gray;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper-eddit {
+  width: 100%;
+  background-color: rgba(233, 62, 0, 0.781);
+  color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.wrapper-mojeinzeraty-grids {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.myads {
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper-myads-grids {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px 10px;
+}
+
+.btn-delete-myinzerat {
+  transition: all 0.3s;
+  color: rgb(239, 239, 239);
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+}
+
+.btn-delete-myinzerat:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+@media (max-width: 775px) {
+  .wrapper-mojeinzeraty {
+    padding: 10px;
+  }
+
+  .wrapper-oblibene {
+    border: none;
+    padding: 0;
+  }
+
+  .wrapper-myads-grids {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 693px) {
+  .wrapper-mojeinzeraty {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profile {
+    padding: 0;
+    border: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .wrapper-myads-grids {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px 5px;
+  }
+}
