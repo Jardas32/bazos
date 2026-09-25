@@ -21,14 +21,14 @@
 }
 
 .icon-add {
-  transition: color 0.3s;
+  transition: 0.3s;
   width: 20px;
   height: 20px;
   color: rgb(255, 255, 255);
 }
 
 .icon-add:hover {
-  color: orangered;
+  transform: scale(1.2);
 }
 
 .icon-add.active {
