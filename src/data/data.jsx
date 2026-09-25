@@ -26,17 +26,17 @@ export const datainzeratinfo = {
     {
       id: 1,
       text: "Všechny inzeráty a hodnocení uživatele",
-      icon: "https://jardas32.github.io/images/vshychni.svg",
+      icon: "./images/vshychni.svg",
     },
     {
       id: 2,
       text: "Přidat do oblíbených",
-      icon: "/images/favourite.svg",
+      icon: "./images/favourite.svg",
     },
     {
       id: 3,
       text: "Označit špatný inzerát",
-      icon: "/images/spam.svg",
+      icon: "./images/spam.svg",
     },
     {
       id: 4,
