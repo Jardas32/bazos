@@ -31,8 +31,6 @@ function CategoryPage() {
 
         const dataSubcategories = await resSubcategories.json();
 
-        console.log(dataSubcategories);
-
         setSubCategorypage(dataSubcategories);
       } catch (err) {
         console.log(err);
@@ -69,6 +67,8 @@ function CategoryPage() {
 
     getCategoryAds();
   }, [slug, subcategoryslug]);
+
+  console.log(ads);
 
   return (
     <div className="wrapper-categorypage">

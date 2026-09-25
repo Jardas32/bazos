@@ -90,7 +90,7 @@ router.get("/category/:categorySlug", async (req, res) => {
         categories.name,
         categories.slug
 
-      ORDER BY ads.created_at DESC
+        ORDER BY ads.created_at ASC
       `,
       [categorySlug]
     );
