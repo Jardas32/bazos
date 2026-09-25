@@ -11,6 +11,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+console.log(datainzeratinfo);
+
 function InzeratPage() {
   const {
     leftBarCategories,
@@ -23,8 +25,6 @@ function InzeratPage() {
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
   const navigate = useNavigate();
-
-  console.log(selectAds);
 
   useEffect(() => {
     const getSubCategories = async () => {

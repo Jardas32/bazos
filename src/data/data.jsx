@@ -2,31 +2,31 @@ export const datainzeratinfo = {
   leftList: [
     {
       id: 1,
-      text: "Jméno:"
+      text: "Jméno:",
     },
     {
       id: 2,
-      text: "Email:"
+      text: "Email:",
     },
     {
       id: 3,
-      text: "Lokalita:"
+      text: "Lokalita:",
     },
     {
       id: 4,
-      text: "Vidělo:"
+      text: "Vidělo:",
     },
     {
       id: 5,
-      text: "Cena:"
-    }
+      text: "Cena:",
+    },
   ],
 
   rightList: [
     {
       id: 1,
       text: "Všechny inzeráty a hodnocení uživatele",
-      icon: "/images/vshychni.svg",
+      icon: "https://jardas32.github.io/images/vshychni.svg",
     },
     {
       id: 2,
