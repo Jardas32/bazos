@@ -13,7 +13,18 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://jardas32.github.io",
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://jardas32.github.io",
+        "http://localhost:5173",
+      ];
+
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
