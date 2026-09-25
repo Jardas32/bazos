@@ -138,7 +138,11 @@ function InzeratPage() {
             </li>
             <li className="left-List-li">
               <span>Email:</span>
-              <span>{selectAds?.seller_email}</span>
+              <span>
+                {selectAds?.seller_email.length > 8
+                  ? `${selectAds?.seller_email.slice(0, 8)}...`
+                  : `${selectAds?.seller_email}`}
+              </span>
             </li>
             <li className="left-List-li">
               <span>Lokalita:</span>
@@ -164,26 +168,25 @@ function InzeratPage() {
 
           <ul className="right-List">
             {datainzeratinfo.rightList.map((info) => (
-              <li key={info.id} className="right-List-li">
-                <img src={info.icon} alt="icon" />
-                <span
-                  onClick={() => {
-                    if (info.id === 1) {
-                      navigate(
-                        `/hodnoceni/${selectAds?.user_id}/${encodeURIComponent(
-                          selectAds?.seller_name
-                        )}`
-                      );
-                    }
+              <li
+                onClick={() => {
+                  if (info.id === 1) {
+                    navigate(
+                      `/hodnoceni/${selectAds?.user_id}/${encodeURIComponent(
+                        selectAds?.seller_name
+                      )}`
+                    );
+                  }
 
-                    if (info.id === 2) {
-                      handleAddFavorites(selectAds?.id);
-                    }
-                  }}
-                  className="right-List-link"
-                >
-                  {info.text}
-                </span>
+                  if (info.id === 2) {
+                    handleAddFavorites(selectAds?.id);
+                  }
+                }}
+                key={info.id}
+                className="right-List-li"
+              >
+                <img src={info.icon} alt="icon" />
+                <span className="right-List-link">{info.text}</span>
               </li>
             ))}
           </ul>
