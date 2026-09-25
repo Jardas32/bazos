@@ -169,9 +169,9 @@ function InzeratPage() {
             </li>
           </ul>
 
-          <ul className="right-List">
+          <div className="right-List">
             {datainzeratinfo.rightList.map((info) => (
-              <li
+              <button
                 onClick={() => {
                   if (info.id === 1) {
                     navigate(
@@ -186,7 +186,7 @@ function InzeratPage() {
                   }
                 }}
                 key={info.id}
-                className="right-List-li"
+                className="right-List-btn"
               >
                 {info.id === 2 ? (
                   <PiStarDuotone
@@ -196,16 +196,16 @@ function InzeratPage() {
                   <img className="right-icon-info" src={info.icon} alt="icon" />
                 )}
 
-                <button className="right-List-link">
+                <span className="right-List-link">
                   {info.id === 2
                     ? inFavorits
                       ? "Odebrát z oblíbených"
                       : info.text
                     : info.text}
-                </button>
-              </li>
+                </span>
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>

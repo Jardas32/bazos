@@ -49,11 +49,14 @@
 }
 
 .left-List-li,
-.right-List-li {
+.right-List-btn {
+  background-color: transparent;
+  cursor: pointer;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
+  border: none;
 }
 
 .left-List-li span:nth-child(1) {
@@ -92,7 +95,7 @@
   border: none;
 }
 
-.right-List-link:hover {
+.right-List-btn:hover .right-List-link{
   color: orangered;
   text-decoration: underline;
 }
