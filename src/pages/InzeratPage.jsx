@@ -6,6 +6,7 @@ import { useBazosContext } from "../context/BazosContext";
 import { datainzeratinfo } from "../data/data";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { PiStarDuotone } from "react-icons/pi";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,9 +21,11 @@ function InzeratPage() {
     selectInzeratInfo,
     setSelectInzeratInfo,
     handleAddFavorites,
+    myFavorites,
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
   const navigate = useNavigate();
+  const inFavorits = myFavorites.some((f) => f.id === selectAds?.id);
 
   useEffect(() => {
     const getSubCategories = async () => {
@@ -185,8 +188,21 @@ function InzeratPage() {
                 key={info.id}
                 className="right-List-li"
               >
-                <img src={info.icon} alt="icon" />
-                <span className="right-List-link">{info.text}</span>
+                {info.id === 2 ? (
+                  <PiStarDuotone
+                    className={`starIcon ${inFavorits ? "active" : ""}`}
+                  />
+                ) : (
+                  <img className="right-icon-info" src={info.icon} alt="icon" />
+                )}
+
+                <span className="right-List-link">
+                  {info.id === 2
+                    ? inFavorits
+                      ? "Odebrát z oblíbených"
+                      : info.text
+                    : info.text}
+                </span>
               </li>
             ))}
           </ul>

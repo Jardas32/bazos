@@ -29,8 +29,10 @@
 }
 
 .wrapper-userinfo {
+  max-width: 550px;
+  width: 100%;
   display: flex;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .left-List,
@@ -68,9 +70,14 @@
   font-weight: 500;
 }
 
-.right-List-li img {
+.right-icon-info,
+.starIcon {
   width: 18px;
   height: 18px;
+}
+
+.starIcon.active {
+  color: orangered;
 }
 
 .right-List-link {
@@ -264,7 +271,7 @@
     line-height: 18px;
   }
 
-  .right-List-li img {
+  .right-icon-info {
     width: 14px;
     height: 14px;
   }
