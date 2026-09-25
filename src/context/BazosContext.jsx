@@ -130,7 +130,7 @@ function BazosContext({ children }) {
           setStatus(data.message);
         }
       } else {
-        const res = await fetch("http://localhost:4000/api/favorites/add", {
+        const res = await fetch(`${API_URL}/api/favorites/add`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
