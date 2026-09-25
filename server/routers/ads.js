@@ -102,7 +102,14 @@ router.get("/category/:categorySlug", async (req, res) => {
 router.get("/subcategory/:subcategorySlug", async (req, res) => {
   const { subcategorySlug } = req.params;
 
+  if (!subcategorySlug) {
+    return res.status(400).json({
+      message: "subcategorySlug empty.",
+    });
+  }
+
   try {
+    // Получаем объявления
     const [ads] = await db.query(
       `
       SELECT
@@ -121,15 +128,7 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
         subcategories.slug AS subcategory_slug,
 
         categories.name AS category_name,
-        categories.slug AS category_slug,
-
-        JSON_ARRAYAGG(
-          JSON_OBJECT(
-            'id', ad_images.id,
-            'image_url', ad_images.image_url
-          )
-            ORDER BY ad_images.id ASC
-        ) AS images
+        categories.slug AS category_slug
 
       FROM ads
 
@@ -142,32 +141,32 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
       INNER JOIN categories
         ON subcategories.categories_id = categories.id
 
-      LEFT JOIN ad_images
-        ON ad_images.ad_id = ads.id
-
       WHERE subcategories.slug = ?
-
-      GROUP BY
-        ads.id,
-        ads.title,
-        ads.description,
-        ads.price,
-        ads.city,
-        ads.postal_code,
-        ads.views,
-        ads.created_at,
-        users.name,
-        subcategories.name,
-        subcategories.slug,
-        categories.name,
-        categories.slug
 
       ORDER BY ads.created_at DESC
       `,
       [subcategorySlug]
     );
 
-    res.json(ads);
+    // Получаем фотографии
+    const [images] = await db.query(
+      `
+      SELECT
+        id,
+        ad_id,
+        image_url
+      FROM ad_images
+      ORDER BY id ASC
+      `
+    );
+
+    // Добавляем фотографии к объявлениям
+    const result = ads.map((ad) => ({
+      ...ad,
+      images: images.filter((image) => image.ad_id === ad.id),
+    }));
+
+    res.json(result);
   } catch (err) {
     console.log(err);
 
