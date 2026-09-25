@@ -11,8 +11,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-console.log(datainzeratinfo.rightList[0].icon);
-
 function InzeratPage() {
   const {
     leftBarCategories,

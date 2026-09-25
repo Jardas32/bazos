@@ -41,27 +41,27 @@ export const datainzeratinfo = {
     {
       id: 4,
       text: "Označit chybnou kategorii inzerátu",
-      icon: "/images/oznacitcategory.svg",
+      icon: "./images/oznacitcategory.svg",
     },
     {
       id: 5,
       text: "Vytisknout inzerát",
-      icon: "/images/print.svg",
+      icon: "./images/print.svg",
     },
     {
       id: 6,
       text: "Sdílejte na Facebooku",
-      icon: "/images/facebook.svg",
+      icon: "./images/facebook.svg",
     },
     {
       id: 7,
       text: "Doporučit kamarádovi",
-      icon: "/images/doporuceni.svg",
+      icon: "./images/doporuceni.svg",
     },
     {
       id: 8,
       text: "Vyhledat podobné inzeráty",
-      icon: "/images/similar.svg",
+      icon: "./images/similar.svg",
     },
   ],
 };
