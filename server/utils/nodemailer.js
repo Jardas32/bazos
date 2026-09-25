@@ -9,6 +9,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("❌ Nodemailer error:", error);
+  } else {
+    console.log("✅ Nodemailer ready:", success);
+  }
+});
+
 export async function sendNodemailer(name, email) {
   await transporter.sendMail({
     from: `"Bazos.cz" <${process.env.EMAIL_BAZOS}>`,

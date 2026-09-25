@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { db } from "../db.js";
 import { sendNodemailer } from "../utils/nodemailer.js";
+import nodemailer from "nodemailer";
 
 const router = express.Router();
 
@@ -128,7 +129,7 @@ router.post("/login", async (req, res) => {
       },
     });
 
-    await sendNodemailer(name, email);
+    await nodemailer(user.name, user.email);
     
   } catch (err) {
     console.log(err);
