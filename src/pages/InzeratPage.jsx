@@ -196,13 +196,13 @@ function InzeratPage() {
                   <img className="right-icon-info" src={info.icon} alt="icon" />
                 )}
 
-                <span className="right-List-link">
+                <button className="right-List-link">
                   {info.id === 2
                     ? inFavorits
                       ? "Odebrát z oblíbených"
                       : info.text
                     : info.text}
-                </span>
+                </button>
               </li>
             ))}
           </ul>
