@@ -13,9 +13,27 @@ function Pridatinzeratsubcategory() {
     selectSubCategory,
     setSelectSubcategory,
     allSubcategorie,
+    setAllsubcategorie,
   } = useBazosContext();
-  const { slug, subcategoryslug } = useParams();
+  const { slug, subcategorySlug } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getSubCategories = async () => {
+      try {
+        const res = await fetch(
+          `https://bazos-yihu.onrender.com/api/subcategories/category/${slug}`
+        );
+
+        const data = await res.json();
+
+        setAllsubcategorie(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSubCategories();
+  }, [slug]);
 
   useEffect(() => {
     if (!isAuth) {
@@ -34,7 +52,7 @@ function Pridatinzeratsubcategory() {
               <Link
                 to={`/${category.slug}`}
                 className={`link-category ${
-                  category.slug === subcategoryslug ? "active" : ""
+                  category.slug === subcategorySlug ? "active" : ""
                 }`}
               >
                 {category.name}

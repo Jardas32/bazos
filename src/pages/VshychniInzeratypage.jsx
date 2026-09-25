@@ -56,7 +56,7 @@ function VshychniInzeratypage() {
         <div className="wrapper-hodnoceni-top">Uživatel: {name}</div>
 
         <h3 className="text-vshechni">
-          Všechny inzeráty uživatele {alladsuser.length}
+          Všechny inzeráty uživatele: {alladsuser.length}
         </h3>
 
         <div className="wrapper-alladsuser-grids">

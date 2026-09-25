@@ -349,8 +349,6 @@ function BazosContext({ children }) {
 
         const dataCategories = await res.json();
 
-        console.log(dataCategories);
-
         const categoriesWithIcons = dataCategories.map((category) => {
           if (category.slug === "auto") {
             return { ...category, icon: "./images/auto.svg" };
@@ -380,24 +378,6 @@ function BazosContext({ children }) {
 
     getAllcategories();
   }, []);
-
-  useEffect(() => {
-    const subcategories = async () => {
-      try {
-        const res = await fetch(
-          `${API_URL}/api/subcategories/category/${selectSekce}`
-        );
-
-        const data = await res.json();
-
-        setAllsubcategorie(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    subcategories();
-  }, [selectSekce]);
 
   const values = {
     subCategories,
