@@ -57,6 +57,8 @@ router.get("/category/:categorySlug", async (req, res) => {
             'id', ad_images.id,
             'image_url', ad_images.image_url
           )
+
+          ORDER BY ad_images.id ASC
         ) AS images
 
       FROM ads
@@ -90,7 +92,7 @@ router.get("/category/:categorySlug", async (req, res) => {
         categories.name,
         categories.slug
 
-        ORDER BY ads.created_at ASC
+        ORDER BY ads.created_at DESC
       `,
       [categorySlug]
     );
@@ -134,6 +136,7 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
             'id', ad_images.id,
             'image_url', ad_images.image_url
           )
+            ORDER BY ad_images.id ASC
         ) AS images
 
       FROM ads
