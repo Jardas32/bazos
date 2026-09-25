@@ -37,7 +37,7 @@ function Cardadds({ ad }) {
             className="img-card-ads"
             src={
               ad?.images?.[0]?.image_url
-                ? `${ad?.images?.[0]?.image_url}`
+                ? `${ad?.images[0]?.image_url}`
                 : emptyImg
             }
             alt="icon-adds"
