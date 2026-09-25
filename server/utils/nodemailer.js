@@ -3,8 +3,9 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_BAZOS,
     pass: process.env.SMPT_PASSWORD,
@@ -20,6 +21,8 @@ transporter.verify((error, success) => {
 });
 
 export async function sendNodemailer(name, email) {
+  console.log(name, email);
+
   await transporter.sendMail({
     from: `"Bazos.cz" <${process.env.EMAIL_BAZOS}>`,
     to: email,
