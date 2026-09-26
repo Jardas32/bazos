@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 import { IoMdCloseCircle } from "react-icons/io";
 import emptyImg from "/images/empty.png";
+import LoadingComponent from "../components/LoadingComponent";
 
 function Mojeinzeraty() {
   const { subcategoryslug } = useParams();
@@ -15,7 +16,12 @@ function Mojeinzeraty() {
     myAds,
     handleAdsDelete,
     deleteAcount,
+    authLoading,
   } = useBazosContext();
+
+  if (authLoading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <div className="wrapper-mojeinzeraty">
@@ -24,14 +30,14 @@ function Mojeinzeraty() {
 
         <ul className="list-category">
           {leftBarCategories?.map((category) => (
-            <li key={category.id} className="subcategory">
+            <li key={category?.id} className="subcategory">
               <Link
-                to={`/${category.slug}`}
+                to={`/${category?.slug}`}
                 className={`link-category ${
-                  category.slug === subcategoryslug ? "active" : ""
+                  category?.slug === subcategoryslug ? "active" : ""
                 }`}
               >
-                {category.name}
+                {category?.name}
               </Link>
             </li>
           ))}
@@ -73,7 +79,7 @@ function Mojeinzeraty() {
                       <div className="wrapper-img-card-adds">
                         <span className="top">TOP</span>
                         <IoMdCloseCircle
-                          onClick={() => handleAdsDelete(ad.id)}
+                          onClick={() => handleAdsDelete(ad?.id)}
                           className="btn-delete-myinzerat"
                         />
                         <img

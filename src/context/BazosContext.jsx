@@ -36,6 +36,7 @@ function BazosContext({ children }) {
   const [myAds, setMyAds] = useState([]);
   const [selectInzeratInfo, setSelectInzeratInfo] = useState(null);
   const [alladsuser, setAlladsuser] = useState([]);
+  const [authLoading, setAuthLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleFiles = (e) => {
@@ -221,13 +222,18 @@ function BazosContext({ children }) {
           setMe(dataMe.user);
         } else {
           setIsAuth(false);
-          setError(dataMe.message);
+          setMe(null);
         }
       } catch (err) {
         console.log(err);
+        setIsAuth(false);
+        setMe(null);
+      } finally {
+        setAuthLoading(false);
       }
     };
     authMe();
+
   }, []);
 
   const register = async (e) => {
@@ -384,8 +390,6 @@ function BazosContext({ children }) {
           return category;
         });
 
-        console.log(categoriesWithIcons);
-
         setSubCategories(categoriesWithIcons);
         setLeftBarCategories(categoriesWithIcons);
       } catch (err) {
@@ -464,6 +468,7 @@ function BazosContext({ children }) {
     setAlladsuser,
     alladsuser,
     setCheked,
+    authLoading
   };
 
   return (
