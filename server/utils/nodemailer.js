@@ -1,46 +1,22 @@
 import "dotenv/config";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_BAZOS,
-    pass: process.env.SMPT_PASSWORD,
-  },
-});
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ Nodemailer error:", error);
-  } else {
-    console.log("✅ Nodemailer ready:", success);
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendNodemailer(name, email) {
-  console.log(name, email);
-
-  await transporter.sendMail({
-    from: `"Bazos.cz" <${process.env.EMAIL_BAZOS}>`,
+  await resend.emails.send({
+    from: `Bazos.cz <${process.env.EMAIL_BAZOS}>`,
     to: email,
     subject: "Děkujeme za registraci",
     text: `
-    Dobrý den ${name},
-    
-    děkujeme, že jste se zaregistrovali na našem webu Bazoš.cz.
-    
-    Váš účet byl úspěšně vytvořen.
-    
-    Navštívit Bazoš.cz:
-    https://www.bazos.cz/
-    
-    Přejeme vám příjemné používání našeho webu.
-    
-    Bazoš.cz
-    `,
+      Dobrý den ${name},
+      děkujeme, že jste se zaregistrovali na našem webu Bazoš.cz.
+      Váš účet byl úspěšně vytvořen.
+      Navštívit Bazoš.cz:
+      https://www.bazos.cz/
+      Přejeme vám příjemné používání našeho webu.
+      Bazoš.cz
+      `,
     html: `
       <div style="
         max-width: 600px;
@@ -50,54 +26,54 @@ export async function sendNodemailer(name, email) {
         color: #333;
       ">
 
-        <h1 style="color: #222;">
-          Bazoš.cz
-        </h1>
+      <h1 style="color: #222;">
+        Bazoš.cz
+      </h1>
+  
+      <h2>
+        Děkujeme za registraci!
+      </h2>
+  
+      <p>
+        Dobrý den <strong>${name}</strong>,
+      </p>
+  
+      <p>
+        děkujeme, že jste se zaregistrovali
+        na našem webu <strong>Bazoš.cz</strong>.
+      </p>
 
-        <h2>
-          Děkujeme za registraci!
-        </h2>
+      <p>
+        Váš účet byl úspěšně vytvořen.
+      </p>
+  
+      <div>
+        <a
+          href="https://www.bazos.cz/"
+          style="
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(233, 62, 0, 0.781);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+          "
+        >
+          Navštívit Bazoš.cz
+      </a>
+       </div>
+   
+       <p>
+         Přejeme vám příjemné používání našeho webu.
+       </p>
+   
+       <p>
+         S pozdravem<br>
+         <strong>Bazoš.cz</strong>
+       </p>
 
-        <p>
-          Dobrý den <strong>${name}</strong>,
-        </p>
-
-        <p>
-          děkujeme, že jste se zaregistrovali
-          na našem webu <strong>Bazoš.cz</strong>.
-        </p>
-
-        <p>
-          Váš účet byl úspěšně vytvořen.
-        </p>
-
-        <div>
-          <a
-            href="https://www.bazos.cz/"
-            style="
-              display: inline-block;
-              padding: 12px 24px;
-              background: rgba(233, 62, 0, 0.781);
-              color: white;
-              text-decoration: none;
-              border-radius: 5px;
-              font-weight: bold;
-            "
-          >
-            Navštívit Bazoš.cz
-          </a>
-        </div>
-
-        <p>
-          Přejeme vám příjemné používání našeho webu.
-        </p>
-
-        <p>
-          S pozdravem<br>
-          <strong>Bazoš.cz</strong>
-        </p>
-
-      </div>
-    `,
+    </div>
+`,
   });
 }
