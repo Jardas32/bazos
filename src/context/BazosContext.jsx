@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 const API_URL = "https://bazos-yihu.onrender.com";
 
 const BazosContextProvider = createContext();
@@ -36,6 +36,7 @@ function BazosContext({ children }) {
   const [myAds, setMyAds] = useState([]);
   const [selectInzeratInfo, setSelectInzeratInfo] = useState(null);
   const [alladsuser, setAlladsuser] = useState([]);
+  const navigate = useNavigate();
 
   const handleFiles = (e) => {
     const file = Array.from(e.target.files);
@@ -85,7 +86,8 @@ function BazosContext({ children }) {
         setCity("");
         setPostcod("");
         setImages([]);
-        getMyAds();
+        await getMyAds();
+        navigate("/mojeinzeraty");
       } else {
         setStatus(data.message);
       }
@@ -317,6 +319,7 @@ function BazosContext({ children }) {
 
       setMe(null);
       setIsAuth(false);
+      setMyAds([]);
       setError(dataLogout.message);
     } catch (err) {
       console.log(err);
