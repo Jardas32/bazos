@@ -57,7 +57,7 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    // await sendNodemailer(name, email);
+    await sendEmailuser(name, email);
 
     res.status(201).json({
       message: "Registrace byla úspěšná",
@@ -97,8 +97,6 @@ router.post("/login", async (req, res) => {
     }
 
     const user = users[0];
-
-    await sendEmailuser(user.name, user.email);
 
     const passwordCorrect = await bcrypt.compare(passwordLogin, user.password);
 
