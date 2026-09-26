@@ -17,7 +17,6 @@ const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
-
 router.post("/register", async (req, res) => {
   const { email, password, name } = req.body;
 
@@ -59,9 +58,8 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    // Email не должен ломать регистрацию
     try {
-      await sendNodeMailer(name, email);
+      await sendEmailuser(name, "jardadjarda@gmail.com");
       console.log("✅ Registrační email byl odeslán");
     } catch (emailError) {
       console.error("❌ Chyba při odesílání emailu:", emailError);
