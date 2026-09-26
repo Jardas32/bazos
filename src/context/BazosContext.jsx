@@ -221,7 +221,7 @@ function BazosContext({ children }) {
   useEffect(() => {
     getMyFavorites();
     getMyAds();
-  }, [isAuth]);
+  }, [isAuth, authLoading]);
 
   useEffect(() => {
     const authMe = async () => {
