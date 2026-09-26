@@ -374,6 +374,10 @@ function BazosContext({ children }) {
             return { ...category, icon: "./images/pc.svg" };
           }
 
+          if (category.slug === "zvirata") {
+            return { ...category, icon: "./images/zvirata.svg" };
+          }
+
           return category;
         });
 
