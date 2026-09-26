@@ -57,6 +57,7 @@ function Register() {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             name=""
+            required
           />
         </div>
         <div className="groupInputregister">
@@ -66,6 +67,7 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             name=""
+            required
           />
         </div>
         <div className="groupInputregister">
@@ -75,6 +77,7 @@ function Register() {
             onChange={(e) => setName(e.target.value)}
             type="text"
             name=""
+            required
           />
         </div>
 
