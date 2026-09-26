@@ -447,6 +447,7 @@ function BazosContext({ children }) {
     setAlladsuser,
     alladsuser,
     setCheked,
+    handleAdsDelete
   };
 
   return (

@@ -17,7 +17,6 @@ function Mojeinzeraty() {
     deleteAcount,
   } = useBazosContext();
 
-
   return (
     <div className="wrapper-mojeinzeraty">
       <div className="wrapper-subcategorie">
@@ -71,7 +70,7 @@ function Mojeinzeraty() {
                 {myAds.map((ad) => (
                   <div
                     key={ad.id}
-                    onClick={() => setAdId(ad.id)}
+                    onClick={() => handleAdsDelete(ad.id)}
                     className="wrapper-adds-card"
                   >
                     <Link className="link-inzeratpage">
