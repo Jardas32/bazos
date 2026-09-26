@@ -161,8 +161,8 @@
 /* Smazat ucet */
 
 .wrapper-deleteaccount {
-  background-color: aquamarine;
   position: relative;
+  border-radius: 4px;
 }
 
 .wrapper-yesno {
