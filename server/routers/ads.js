@@ -246,7 +246,7 @@ router.delete("/inzerat/delete/:id", auth, async (req, res) => {
   try {
     // const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-    const userId = req.use.userId;
+    const userId = req.user.userId;
 
     const [images] = await db.query(
       `
