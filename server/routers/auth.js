@@ -181,9 +181,16 @@ router.get("/me", async (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
+    secure: true,
+    sameSite: "none",
+    path: "/",
   });
+
+  // res.clearCookie("token", {
+  //   httpOnly: true,
+  //   secure: isProduction,
+  //   sameSite: isProduction ? "none" : "lax",
+  // });
 
   res.json({
     message: "Byli jste odhlášeni",
@@ -214,10 +221,17 @@ router.delete("/delete-acount", async (req, res) => {
       });
     }
 
+    // res.clearCookie("token", {
+    //   httpOnly: true,
+    //   secure: isProduction,
+    //   sameSite: isProduction ? "none" : "lax",
+    // });
+
     res.clearCookie("token", {
       httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? "none" : "lax",
+      secure: true,
+      sameSite: "none",
+      path: "/",
     });
 
     res.status(200).json({

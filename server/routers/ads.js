@@ -4,7 +4,7 @@ import multer from "multer";
 import path from "path";
 import { db } from "../db.js";
 import upload from "../middleware/upload.js";
-// import { auth } from "../middleware/auth.js";
+import { auth } from "../middleware/auth.js";
 import { v2 as cloudinary } from "cloudinary";
 
 const router = express.Router();
@@ -177,71 +177,76 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
   }
 });
 
-router.post("/inzerat/add", upload.array("image", 10), async (req, res) => {
-  const { subcategory_id, title, description, price, city, postcod, user_id } =
-    req.body;
+router.post(
+  "/inzerat/add",
+  auth,
+  upload.array("image", 10),
+  async (req, res) => {
+    try {
+      const { subcategory_id, title, description, price, city, postcod } =
+        req.body;
 
-  const token = req.cookies.token;
+      const userId = req.user.userId;
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      if (!subcategory_id || !title || !description || !price || !userId) {
+        return res.status(400).json({
+          message:
+            "Pole subcategory_id, title, description, price, city a postcod jsou povinná!",
+        });
+      }
 
-  const userId = decoded.userId;
-
-  if (!subcategory_id || !title || !description || !price || !userId) {
-    return res.status(401).json({
-      message:
-        "Pole subcategory_id, title, description, price, city, postcod a user_id jsou povinná!",
-    });
-  }
-
-  const [result] = await db.query(
-    `INSERT INTO ads (subcategory_id, title, description, price, city, postal_code, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [subcategory_id, title, description, price, city, postcod, userId]
-  );
-
-  const adId = result.insertId;
-
-  if (req.files && req.files.length > 0) {
-    for (const file of req.files) {
-      await db.query(
-        `INSERT INTO ad_images
-        (ad_id, image_url, public_id)
-        VALUES (?,?, ?)
-        `,
-        [adId, file.path, file.filename]
+      const [result] = await db.query(
+        `INSERT INTO ads 
+        (subcategory_id, title, description, price, city, postal_code, user_id) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [subcategory_id, title, description, price, city, postcod, userId]
       );
+
+      const adId = result.insertId;
+
+      if (req.files && req.files.length > 0) {
+        for (const file of req.files) {
+          await db.query(
+            `INSERT INTO ad_images
+            (ad_id, image_url, public_id)
+            VALUES (?, ?, ?)`,
+            [adId, file.path, file.filename]
+          );
+        }
+      }
+
+      return res.status(201).json({
+        message: "Inzerát byl úspěšně přidán.",
+        inzerat: {
+          inzeratId: adId,
+          title,
+        },
+      });
+    } catch (err) {
+      console.log("ADD AD ERROR:", err);
+
+      return res.status(500).json({
+        message: "Chyba serveru při přidávání inzerátu.",
+      });
     }
   }
+);
 
-  res.json({
-    message: "Inzerát byl úspěšně přidán.",
-    inzerat: {
-      inzeratId: result.insertId,
-      title,
-    },
-  });
-
-  try {
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-router.delete("/inzerat/delete/:id", async (req, res) => {
+router.delete("/inzerat/delete/:id", auth, async (req, res) => {
   const { id } = req.params;
 
-  const token = req.cookies.token;
+  // const token = req.cookies.token;
 
-  if (!token) {
-    return res.status(401).json({
-      message: "Nejste přihlášen.",
-    });
-  }
+  // if (!token) {
+  //   return res.status(401).json({
+  //     message: "Nejste přihlášen.",
+  //   });
+  // }
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET);
+    // const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-    const userId = decode.userId;
+    const userId = req.use.userId;
 
     const [images] = await db.query(
       `

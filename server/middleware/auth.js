@@ -17,6 +17,10 @@ function auth(req, res, next) {
     next();
   } catch (err) {
     console.log(err);
+
+    return res.status(401).json({
+      message: "Neplatné nebo prošlé přihlášení",
+    });
   }
 }
 
