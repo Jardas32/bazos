@@ -4,7 +4,7 @@ import multer from "multer";
 import path from "path";
 import { db } from "../db.js";
 import upload from "../middleware/upload.js";
-import { auth } from "../middleware/auth.js";
+import auth from "../middleware/auth.js";
 import { v2 as cloudinary } from "cloudinary";
 
 const router = express.Router();
