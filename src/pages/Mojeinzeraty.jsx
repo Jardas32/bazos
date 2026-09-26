@@ -73,7 +73,7 @@ function Mojeinzeraty() {
                     onClick={() => handleAdsDelete(ad.id)}
                     className="wrapper-adds-card"
                   >
-                    <Link className="link-inzeratpage">
+                    <div className="link-inzeratpage">
                       <div className="wrapper-img-card-adds">
                         <span className="top">TOP</span>
                         <IoMdCloseCircle
@@ -107,7 +107,7 @@ function Mojeinzeraty() {
                           })}
                         </span>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 ))}
               </div>
