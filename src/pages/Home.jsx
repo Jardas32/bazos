@@ -3,12 +3,12 @@ import Cardcategories from "../components/Cardcategories";
 import { useBazosContext } from "../context/BazosContext";
 
 function Home() {
-  const { subCategories } = useBazosContext();
+  const { allCategories } = useBazosContext();
 
   return (
     <div className="wrapper-home">
       <div className="wrapper-grids">
-        {subCategories.map((category) => (
+        {allCategories.map((category) => (
           <Cardcategories key={category.id} category={category} />
         ))}
       </div>

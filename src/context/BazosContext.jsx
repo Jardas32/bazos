@@ -6,6 +6,7 @@ const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
   const [subCategories, setSubCategories] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
   const [ads, setAds] = useState([]);
   const [selectAds, setSelectAds] = useState(null);
   const [loadind, setLoading] = useState(false);
@@ -249,7 +250,7 @@ function BazosContext({ children }) {
       }
     };
     authMe();
-  }, []);
+  }, [isAuth]);
 
   const register = async (e) => {
     e.preventDefault();
@@ -405,6 +406,7 @@ function BazosContext({ children }) {
           return category;
         });
 
+        setAllCategories(categoriesWithIcons);
         setSubCategories(categoriesWithIcons);
         setLeftBarCategories(categoriesWithIcons);
       } catch (err) {
@@ -484,6 +486,7 @@ function BazosContext({ children }) {
     alladsuser,
     setCheked,
     authLoading,
+    allCategories,
   };
 
   return (
