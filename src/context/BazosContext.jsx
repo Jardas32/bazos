@@ -375,11 +375,16 @@ function BazosContext({ children }) {
           }
 
           if (category.slug === "zvirata") {
-            return { ...category, icon: "./images/zvirata.svg" };
+            return {
+              ...category,
+              icon: "./images/zvirata.svg",
+            };
           }
 
           return category;
         });
+
+        console.log(categoriesWithIcons);
 
         setSubCategories(categoriesWithIcons);
         setLeftBarCategories(categoriesWithIcons);
