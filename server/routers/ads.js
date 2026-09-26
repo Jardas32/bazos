@@ -244,8 +244,8 @@ router.delete("/inzerat/delete/:id", async (req, res) => {
     const [images] = await db.query(
       `
       SELECT public_id
-      FROM da_images
-      WHERE id = ?
+      FROM ad_images
+      WHERE ad_id = ?
       `,
       [id]
     );

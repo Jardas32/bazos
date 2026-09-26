@@ -97,6 +97,7 @@ function BazosContext({ children }) {
   };
 
   const handleAdsDelete = async (id) => {
+    console.log(id);
     if (!id) return;
 
     try {
@@ -105,9 +106,13 @@ function BazosContext({ children }) {
         credentials: "include",
       });
 
+      const data = await res.json();
+
       if (res.ok) {
         getMyAds();
       }
+
+      console.log("Inzerát byl smazán:", data.message);
     } catch (err) {
       console.log(err);
     }
@@ -447,7 +452,6 @@ function BazosContext({ children }) {
     setAlladsuser,
     alladsuser,
     setCheked,
-    handleAdsDelete
   };
 
   return (

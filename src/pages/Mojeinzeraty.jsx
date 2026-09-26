@@ -68,11 +68,7 @@ function Mojeinzeraty() {
             <div className="wrapper-mojeinzeraty-grids">
               <div className="wrapper-myads-grids">
                 {myAds.map((ad) => (
-                  <div
-                    key={ad.id}
-                    onClick={() => handleAdsDelete(ad.id)}
-                    className="wrapper-adds-card"
-                  >
+                  <div key={ad.id} className="wrapper-adds-card">
                     <div className="link-inzeratpage">
                       <div className="wrapper-img-card-adds">
                         <span className="top">TOP</span>
