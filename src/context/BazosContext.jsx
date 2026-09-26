@@ -186,7 +186,10 @@ function BazosContext({ children }) {
   };
 
   const getMyAds = async () => {
-    if (!isAuth) return;
+    if (!isAuth) {
+      setMyAds([]);
+      return;
+    }
 
     try {
       const res = await fetch(`${API_URL}/api/ads/my_ads`, {
@@ -196,9 +199,22 @@ function BazosContext({ children }) {
 
       const data = await res.json();
 
+      if (!res.ok) {
+        console.log("MY ADS ERROR:", data);
+        setMyAds([]);
+        return;
+      }
+
+      if (!Array.isArray(data)) {
+        console.log("MY ADS IS NOT ARRAY:", data);
+        setMyAds([]);
+        return;
+      }
+
       setMyAds(data);
     } catch (err) {
-      console.log(err);
+      console.log("MY ADS FETCH ERROR:", err);
+      setMyAds([]);
     }
   };
 
@@ -233,7 +249,6 @@ function BazosContext({ children }) {
       }
     };
     authMe();
-
   }, []);
 
   const register = async (e) => {
@@ -468,7 +483,7 @@ function BazosContext({ children }) {
     setAlladsuser,
     alladsuser,
     setCheked,
-    authLoading
+    authLoading,
   };
 
   return (

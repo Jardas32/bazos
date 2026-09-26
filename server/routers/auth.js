@@ -58,8 +58,6 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    await sendEmailuser(name, "jardadjarda@gmail.com");
-
     return res.status(201).json({
       message: "Registrace byla úspěšná",
       user: {
@@ -123,7 +121,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({
       message: "Přihlášení bylo úspěšné",
       user: {
-        userid: user.id,
+        id: user.id,
         email: user.email,
         name: user.name,
       },
