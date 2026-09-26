@@ -109,7 +109,7 @@ function BazosContext({ children }) {
       const data = await res.json();
 
       if (res.ok) {
-        getMyAds();
+        await getMyAds();
       }
 
       console.log("Inzerát byl smazán:", data.message);

@@ -233,7 +233,9 @@ router.delete("/inzerat/delete/:id", async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Nejste přihlášen." });
+    return res.status(401).json({
+      message: "Nejste přihlášen.",
+    });
   }
 
   try {
@@ -258,24 +260,37 @@ router.delete("/inzerat/delete/:id", async (req, res) => {
 
     await db.query(
       `
-      SELECT FROM ad_images
+      DELETE FROM ad_images
       WHERE ad_id = ?
       `,
       [id]
     );
 
     const [deletedAd] = await db.query(
-      `DELETE FROM ads
-       WHERE id = ?
-       AND user_id = ? `,
+      `
+      DELETE FROM ads
+      WHERE id = ?
+      AND user_id = ?
+      `,
       [id, userId]
     );
 
-    res
-      .status(200)
-      .json({ message: "Inzerát byl úspěšně odstraněn.", deletedId: id });
+    if (deletedAd.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Inzerát nebyl nalezen.",
+      });
+    }
+
+    res.status(200).json({
+      message: "Inzerát byl úspěšně odstraněn.",
+      deletedId: id,
+    });
   } catch (err) {
-    console.log(err);
+    console.error("DELETE ERROR:", err);
+
+    res.status(500).json({
+      message: "Chyba při mazání inzerátu.",
+    });
   }
 });
 
