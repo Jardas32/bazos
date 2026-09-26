@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendNodemailer(name, email) {
+export async function sendEmailuser(name, email) {
   const { data, error } = await resend.emails.send({
     from: "Bazos.cz <onboarding@resend.dev>",
     to: [email],
