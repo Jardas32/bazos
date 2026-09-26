@@ -58,12 +58,7 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    try {
-      await sendEmailuser(name, "jardadjarda@gmail.com");
-      console.log("✅ Registrační email byl odeslán");
-    } catch (emailError) {
-      console.error("❌ Chyba při odesílání emailu:", emailError);
-    }
+    await sendEmailuser(name, "jardadjarda@gmail.com");
 
     return res.status(201).json({
       message: "Registrace byla úspěšná",

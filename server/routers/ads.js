@@ -5,6 +5,7 @@ import path from "path";
 import { db } from "../db.js";
 import upload from "../middleware/upload.js";
 // import { auth } from "../middleware/auth.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const router = express.Router();
 
@@ -204,10 +205,10 @@ router.post("/inzerat/add", upload.array("image", 10), async (req, res) => {
     for (const file of req.files) {
       await db.query(
         `INSERT INTO ad_images
-        (ad_id, image_url)
-        VALUES (?,?)
+        (ad_id, image_url, public_id)
+        VALUES (?,?, ?)
         `,
-        [adId, file.path]
+        [adId, file.path, file.filename]
       );
     }
   }
@@ -235,11 +236,34 @@ router.delete("/inzerat/delete/:id", async (req, res) => {
     return res.status(401).json({ message: "Nejste přihlášen." });
   }
 
-  const decode = jwt.verify(token, process.env.JWT_SECRET);
-
-  const userId = decode.userId;
-
   try {
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+    const userId = decode.userId;
+
+    const [images] = await db.query(
+      `
+      SELECT public_id
+      FROM da_images
+      WHERE id = ?
+      `,
+      [id]
+    );
+
+    for (const img of images) {
+      if (img.public_id) {
+        await cloudinary.uploader.destroy(img.public_id);
+      }
+    }
+
+    await db.query(
+      `
+      SELECT FROM ad_images
+      WHERE ad_id = ?
+      `,
+      [id]
+    );
+
     const [deletedAd] = await db.query(
       `DELETE FROM ads
        WHERE id = ?
