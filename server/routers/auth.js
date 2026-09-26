@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { db } from "../db.js";
 import { sendEmailuser } from "../utils/nodemailer.js";
+import { sendNodeMailer } from "../utils/nodemailer.js";
 
 const router = express.Router();
 
@@ -57,7 +58,8 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    await sendEmailuser(name, email);
+    // await sendEmailuser(name, email);
+    await sendNodeMailer(name, email);
 
     res.status(201).json({
       message: "Registrace byla úspěšná",
