@@ -51,13 +51,6 @@ function Mojeinzeraty() {
 
         <h4 className="uzivatel">Uživatel:</h4>
 
-        <div>
-          <p>authLoading: {String(authLoading)}</p>
-          <p>isAuth: {String(isAuth)}</p>
-          <p>me: {JSON.stringify(me)}</p>
-          <p>myAds: {JSON.stringify(myAds)}</p>
-        </div>
-
         {me ? (
           <div className="wrapper-profile-info">
             <div className="profile-group">
