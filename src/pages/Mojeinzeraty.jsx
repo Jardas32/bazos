@@ -23,7 +23,7 @@ function Mojeinzeraty() {
         <h3 className="text-categories">Inzerce</h3>
 
         <ul className="list-category">
-          {leftBarCategories.map((category) => (
+          {leftBarCategories?.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
                 to={`/${category.slug}`}
@@ -40,7 +40,7 @@ function Mojeinzeraty() {
 
       <div className="profile">
         <div className="wrapper-eddit">
-          <h4 className="myads">Moje inzeráty: {myAds.length}</h4>
+          <h4 className="myads">Moje inzeráty: {myAds?.length}</h4>
         </div>
 
         <h4 className="uzivatel">Uživatel:</h4>
@@ -67,7 +67,7 @@ function Mojeinzeraty() {
 
             <div className="wrapper-mojeinzeraty-grids">
               <div className="wrapper-myads-grids">
-                {myAds.map((ad) => (
+                {myAds?.map((ad) => (
                   <div key={ad.id} className="wrapper-adds-card">
                     <div className="link-inzeratpage">
                       <div className="wrapper-img-card-adds">
@@ -86,17 +86,17 @@ function Mojeinzeraty() {
                           alt="icon-adds"
                         />
 
-                        <span className="city">{ad.city}</span>
+                        <span className="city">{ad?.city}</span>
                       </div>
 
                       <div className="wrapper-card-adds-info">
                         <h1 className="title-card-adds">
-                          {ad.title.length > 45
+                          {ad?.title.length > 45
                             ? `${ad.title.slice(0, 56)}...`
                             : ad.title}
                         </h1>
                         <span className="price-card-adds">
-                          {Number(ad.price).toLocaleString("cs-CZ", {
+                          {Number(ad?.price).toLocaleString("cs-CZ", {
                             style: "currency",
                             currency: "CZK",
                             maximumFractionDigits: 0,
