@@ -158,6 +158,62 @@
   transform: scale(1.1);
 }
 
+/* Smazat ucet */
+
+.wrapper-deleteaccount {
+  background-color: aquamarine;
+  position: relative;
+}
+
+.wrapper-yesno {
+  transition: all 0.3s;
+  transform: scale(0);
+  opacity: 0;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  width: 215px;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.wrapper-yesno.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.text-yesno {
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.btn-yesno {
+  transition: all 0.3s;
+  margin-top: 8px;
+  background-color: rgba(255, 68, 0, 0.703);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 3px 8px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 2px;
+}
+
+.btn-yesno.left {
+  margin-left: 0;
+}
+
+.btn-yesno:hover {
+  background-color: orangered;
+  transform: scale(1.1);
+}
+
 @media (max-width: 775px) {
   .wrapper-mojeinzeraty {
     padding: 10px;

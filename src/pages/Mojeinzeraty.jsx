@@ -17,6 +17,8 @@ function Mojeinzeraty() {
     handleAdsDelete,
     deleteAcount,
     authLoading,
+    deleteAccount,
+    setDeleteAccount,
   } = useBazosContext();
 
   if (authLoading) {
@@ -66,9 +68,33 @@ function Mojeinzeraty() {
               <button onClick={logout} className="btn-odhlasitse">
                 Odhlásit se
               </button>
-              <button onClick={deleteAcount} className="btn-delete-acount">
-                Smazat účet
-              </button>
+
+              <div className="wrapper-deleteaccount">
+                <button
+                  onClick={() => setDeleteAccount(true)}
+                  className="btn-delete-acount"
+                >
+                  Smazat účet
+                </button>
+                <div
+                  className={`wrapper-yesno ${deleteAccount ? "active" : ""}`}
+                >
+                  <p className="text-yesno">Opravdu chcete účet smazat?</p>
+
+                  <button
+                    onClick={() => deleteAcount()}
+                    className="btn-yesno left"
+                  >
+                    Ano
+                  </button>
+                  <button
+                    onClick={() => setDeleteAccount(false)}
+                    className="btn-yesno"
+                  >
+                    Ne
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div className="wrapper-mojeinzeraty-grids">

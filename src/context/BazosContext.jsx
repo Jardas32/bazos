@@ -38,6 +38,7 @@ function BazosContext({ children }) {
   const [selectInzeratInfo, setSelectInzeratInfo] = useState(null);
   const [alladsuser, setAlladsuser] = useState([]);
   const [authLoading, setAuthLoading] = useState(true);
+  const [deleteAccount, setDeleteAccount] = useState(false);
   const navigate = useNavigate();
 
   const handleFiles = (e) => {
@@ -357,7 +358,7 @@ function BazosContext({ children }) {
 
       const data = await res.json();
 
-      console.log(data.message);
+      setDeleteAccount(false);
       setMe(null);
       setIsAuth(false);
       setError(data.message);
@@ -487,6 +488,8 @@ function BazosContext({ children }) {
     setCheked,
     authLoading,
     allCategories,
+    deleteAccount,
+    setDeleteAccount,
   };
 
   return (
