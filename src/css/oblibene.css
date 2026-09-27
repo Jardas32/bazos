@@ -26,13 +26,14 @@
   width: 100%;
   min-height: 50vh;
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   gap: 5px;
 }
 
 .wrapper-oblibene-card {
+  width: 100%;
   border: 1px solid orange;
   border-radius: 4px;
 }
