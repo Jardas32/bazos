@@ -1,13 +1,16 @@
 import "../css/oblibene.css";
 import { Link } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
-import Register from "../components/Register";
-import Login from "../components/Login";
 import { useParams } from "react-router-dom";
+import LoadingComponent from "../components/LoadingComponent";
 
 function Oblibene() {
   const { subcategoryslug } = useParams();
-  const { leftBarCategories, isLogin, isAuth, myFavorites } = useBazosContext();
+  const { leftBarCategories, myFavorites, authLoading } = useBazosContext();
+
+  if (authLoading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <div className="wrapper-oblibenepage">
@@ -30,51 +33,47 @@ function Oblibene() {
         </ul>
       </div>
 
-      {isAuth ? (
-        <div className="wrapper-oblibene">
-          <div className="wrapper-oblibnee-top">
-            Oblíbené inzeráty: {myFavorites.length}
-          </div>
-
-          {myFavorites.length === 0 ? (
-            <h4>Oblíbené je prázdné.</h4>
-          ) : (
-            <div className="wrapper-oblibene-grids">
-              {myFavorites.map((favorite) => (
-                <div key={favorite.id} className="wrapper-oblibene-card">
-                  <div className="wrapper-oblibene-img">
-                    <img
-                      className="oblibene-img"
-                      src={
-                        favorite?.images
-                          ? `${favorite?.images[0].image_url}`
-                          : "./images/empty.png"
-                      }
-                      alt="img"
-                    />
-                  </div>
-
-                  <div className="wrapper-oblibene-body">
-                    <h4 className="oblibene-title">{favorite.title}</h4>
-                    <p className="oblibene-description">
-                      {favorite.description.slice(0, 60)}...
-                    </p>
-                    <span>
-                      {Number(favorite.price).toLocaleString("cs-CZ", {
-                        style: "currency",
-                        currency: "CZK",
-                        maximumFractionDigits: 0,
-                      })}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+      <div className="wrapper-oblibene">
+        <div className="wrapper-oblibnee-top">
+          Oblíbené inzeráty: {myFavorites.length}
         </div>
-      ) : (
-        <>{isLogin ? <Login /> : <Register />}</>
-      )}
+
+        {myFavorites.length === 0 ? (
+          <h4>Oblíbené je prázdné.</h4>
+        ) : (
+          <div className="wrapper-oblibene-grids">
+            {myFavorites.map((favorite) => (
+              <div key={favorite.id} className="wrapper-oblibene-card">
+                <div className="wrapper-oblibene-img">
+                  <img
+                    className="oblibene-img"
+                    src={
+                      favorite?.images
+                        ? `${favorite?.images[0].image_url}`
+                        : "./images/empty.png"
+                    }
+                    alt="img"
+                  />
+                </div>
+
+                <div className="wrapper-oblibene-body">
+                  <h4 className="oblibene-title">{favorite.title}</h4>
+                  <p className="oblibene-description">
+                    {favorite.description.slice(0, 60)}...
+                  </p>
+                  <span>
+                    {Number(favorite.price).toLocaleString("cs-CZ", {
+                      style: "currency",
+                      currency: "CZK",
+                      maximumFractionDigits: 0,
+                    })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

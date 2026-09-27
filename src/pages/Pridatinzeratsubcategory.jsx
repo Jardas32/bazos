@@ -6,11 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Pridatinzeratsubcategory() {
   const {
     leftBarCategories,
-    isLogin,
     isAuth,
-    selectSekce,
-    setSelectSekce,
-    selectSubCategory,
     setSelectSubcategory,
     allSubcategorie,
     setAllsubcategorie,
@@ -37,7 +33,7 @@ function Pridatinzeratsubcategory() {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate("/oblibene");
+      navigate("/prihlaseni");
     }
   }, [isAuth]);
 

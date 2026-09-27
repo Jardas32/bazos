@@ -38,6 +38,7 @@ function Register() {
             onChange={(e) => setCheked(e.target.checked)}
             type="checkbox"
             name=""
+            required
           />
 
           <span>Souhlasím s</span>
@@ -55,6 +56,7 @@ function Register() {
             onChange={(e) => setEmailLogin(e.target.value)}
             type="email"
             name=""
+            required
           />
         </div>
         <div className="groupInputregister">

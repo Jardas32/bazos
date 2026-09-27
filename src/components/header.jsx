@@ -1,7 +1,10 @@
 import "../css/header.css";
 import { Link } from "react-router-dom";
+import { useBazosContext } from "../context/BazosContext";
 
 function Header() {
+  const { me, isAuth } = useBazosContext();
+
   return (
     <div className="wrapper-header">
       <div className="wrapper-header-top">
@@ -16,8 +19,18 @@ function Header() {
         </div>
 
         <div className="wrapper-nav">
-          <Link to="/oblibene">Oblíbené inzeráty</Link>
-          <Link to="/mojeinzeraty">Moje inzeráty</Link>
+          <Link
+            className={`nav-link ${isAuth ? "active" : ""}`}
+            to="/prihlaseni"
+          >
+            {me ? `${me?.name}` : `Přihlášení`}
+          </Link>
+          <Link className="nav-link" to="/oblibene">
+            Oblíbené inzeráty
+          </Link>
+          <Link className="nav-link" to="/mojeinzeraty">
+            Moje inzeráty
+          </Link>
           <button className="btn-pridat-inzerat">
             <Link className="link-pridat-inzerat" to="/pridat-inzerat">
               Přidat inzerát

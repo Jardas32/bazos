@@ -7,19 +7,8 @@ import LoadingComponent from "../components/LoadingComponent";
 
 function Mojeinzeraty() {
   const { subcategoryslug } = useParams();
-  const {
-    leftBarCategories,
-    isLogin,
-    isAuth,
-    me,
-    logout,
-    myAds,
-    handleAdsDelete,
-    deleteAcount,
-    authLoading,
-    deleteAccount,
-    setDeleteAccount,
-  } = useBazosContext();
+  const { leftBarCategories, me, myAds, handleAdsDelete, authLoading } =
+    useBazosContext();
 
   if (authLoading) {
     return <LoadingComponent />;
@@ -62,39 +51,6 @@ function Mojeinzeraty() {
             <div className="profile-group">
               <span>Name:</span>
               <span>{me?.name}</span>
-            </div>
-
-            <div className="wrapper-delete-acount">
-              <button onClick={logout} className="btn-odhlasitse">
-                Odhlásit se
-              </button>
-
-              <div className="wrapper-deleteaccount">
-                <button
-                  onClick={() => setDeleteAccount(true)}
-                  className="btn-delete-acount"
-                >
-                  Smazat účet
-                </button>
-                <div
-                  className={`wrapper-yesno ${deleteAccount ? "active" : ""}`}
-                >
-                  <p className="text-yesno">Opravdu chcete účet smazat?</p>
-
-                  <button
-                    onClick={() => deleteAcount()}
-                    className="btn-yesno left"
-                  >
-                    Ano
-                  </button>
-                  <button
-                    onClick={() => setDeleteAccount(false)}
-                    className="btn-yesno"
-                  >
-                    Ne
-                  </button>
-                </div>
-              </div>
             </div>
 
             <div className="wrapper-mojeinzeraty-grids">
@@ -145,7 +101,7 @@ function Mojeinzeraty() {
           <div className="wrapper-prihlasitse">
             <h4 className="nejste-prihlaseni">Nejste přihlášeni</h4>
 
-            <Link to="/oblibene" className="prihlasitse">
+            <Link to="/prihlaseni" className="prihlasitse">
               Přihlásit se
             </Link>
           </div>

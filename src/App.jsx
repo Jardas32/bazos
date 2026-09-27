@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./pages/Home";
+import Prihlaseni from "./pages/Prihlaseni";
 import Oblibene from "./pages/oblibene";
 import Mojeinzeraty from "./pages/Mojeinzeraty";
 import PridatInzerat from "./pages/PridatInzerat";
@@ -19,6 +20,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/prihlaseni" element={<Prihlaseni />} />
 
         <Route path="/oblibene" element={<Oblibene />} />
         <Route path="/mojeinzeraty" element={<Mojeinzeraty />} />
