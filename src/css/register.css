@@ -82,7 +82,7 @@
 
 .groupInputregister input {
   transition: all 0.3s;
-  padding: 5px;
+  padding: 8px;
   border-radius: 4px;
   outline: none;
   border: 1px solid transparent;
@@ -98,7 +98,7 @@
   background-color: rgba(255, 68, 0, 0.714);
   color: #fff;
   border: 1px solid #dcdcdc;
-  padding: 5px 16px;
+  padding: 8px 16px;
   font-size: 13px;
   border-radius: 4px;
 }

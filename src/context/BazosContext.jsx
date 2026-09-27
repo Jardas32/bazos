@@ -9,7 +9,7 @@ function BazosContext({ children }) {
   const [allCategories, setAllCategories] = useState([]);
   const [ads, setAds] = useState([]);
   const [selectAds, setSelectAds] = useState(null);
-  const [loadind, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { slug } = useParams();
   const [cheked, setCheked] = useState(false);
@@ -255,6 +255,7 @@ function BazosContext({ children }) {
 
   const register = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!cheked) {
       setError("Musíte souhlasit s podmínkami.");
@@ -290,11 +291,14 @@ function BazosContext({ children }) {
       setName("");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!cheked) {
       setError("Musíte souhlasit s podmínkami.");
@@ -328,6 +332,8 @@ function BazosContext({ children }) {
       setPasswordLogin("");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -425,7 +431,7 @@ function BazosContext({ children }) {
     setAds,
     error,
     setError,
-    loadind,
+    loading,
     setLoading,
     slug,
     selectAds,

@@ -15,7 +15,7 @@ function CategoryPage() {
     setAds,
     error,
     setError,
-    loadind,
+    loading,
     setLoading,
     status,
     setStatus,
@@ -68,7 +68,6 @@ function CategoryPage() {
     getCategoryAds();
   }, [slug, subcategoryslug]);
 
-  console.log(ads);
 
   return (
     <div className="wrapper-categorypage">
@@ -81,7 +80,7 @@ function CategoryPage() {
       <Status status={status} setStatus={setStatus} />
 
       <div className="wrapper-grid-adds">
-        {loadind ? (
+        {loading ? (
           <LoadingComponent />
         ) : ads.length === 0 ? (
           <div className="wrapper-empty">Žádný inzerát nenalezen.</div>

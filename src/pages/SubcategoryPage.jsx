@@ -15,7 +15,7 @@ function SubcategoryPage() {
     setAds,
     error,
     setError,
-    loadind,
+    loading,
     setLoading,
     status,
     setStatus,
@@ -79,7 +79,7 @@ function SubcategoryPage() {
       <Status status={status} setStatus={setStatus} />
 
       <div className="wrapper-grid-adds">
-        {loadind ? (
+        {loading ? (
           <LoadingComponent />
         ) : ads.length === 0 ? (
           <div className="wrapper-empty">Žádný inzerát nenalezen.</div>

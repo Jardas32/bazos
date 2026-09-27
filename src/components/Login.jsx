@@ -1,6 +1,7 @@
 import "../css/register.css";
 import { Link } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
+import { MoonLoader } from "react-spinners";
 
 function Register() {
   const {
@@ -12,6 +13,7 @@ function Register() {
     setPasswordLogin,
     login,
     setCheked,
+    loading,
   } = useBazosContext();
 
   return (
@@ -70,7 +72,11 @@ function Register() {
         </div>
 
         <button className="btn-register" type="submit">
-          Přihlásit se
+          {loading ? (
+            <MoonLoader size={14} color="#fff" className="login-loading" />
+          ) : (
+            "Přihlásit se"
+          )}
         </button>
       </form>
     </div>
