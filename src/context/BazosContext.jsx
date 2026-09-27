@@ -410,6 +410,10 @@ function BazosContext({ children }) {
             };
           }
 
+          if (category.slug === "nabytek") {
+            return { ...category, icon: "./images/nabytek.svg" };
+          }
+
           return category;
         });
 

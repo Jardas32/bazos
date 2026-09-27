@@ -20,7 +20,7 @@ function Pridatinzeratads() {
     images,
     setImages,
     handleFiles,
-    loadind,
+    loading,
   } = useBazosContext();
   const { subcategoryslug } = useParams();
 
@@ -114,7 +114,7 @@ function Pridatinzeratads() {
           </div>
           <p className="status">{status}</p>
           <button type="submit" className="btn-pridat">
-            {loadind ? "Odesílání..." : "Pridat"}
+            {loading ? "Odesílání..." : "Pridat"}
           </button>
         </form>
       </div>
