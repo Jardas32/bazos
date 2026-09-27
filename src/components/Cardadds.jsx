@@ -8,11 +8,8 @@ function Cardadds({ ad }) {
   const { slug } = useParams();
   const {
     isAuth,
-    adId,
-    setAdId,
     handleAddFavorites,
     myFavorites,
-    setMyFavorites,
   } = useBazosContext();
   const inFavorits = myFavorites.find((f) => f.id === ad.id);
 
