@@ -95,7 +95,7 @@
   border: none;
 }
 
-.right-List-btn:hover .right-List-link{
+.right-List-btn:hover .right-List-link {
   color: orangered;
   text-decoration: underline;
 }
@@ -224,6 +224,12 @@
     height: 64px;
     border: 1px solid gray;
     border-radius: 4px;
+  }
+
+  .wrapper-sliders .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 255, 255);
   }
 }
 
