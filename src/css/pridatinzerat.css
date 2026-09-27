@@ -16,7 +16,7 @@
 .wrapper-sekce {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 15px 0;
 }
 
@@ -74,6 +74,12 @@
   width: 45px;
   height: 45px;
   object-fit: contain;
+}
+
+@media (max-width: 850px) {
+  .wrapper-sekce {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
 
 @media (max-width: 775px) {

@@ -4,3 +4,10 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
+
+.wrapper-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}

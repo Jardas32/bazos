@@ -208,7 +208,7 @@
   }
 
   .wrapper-sliders {
-    height: 330px;
+    height: 430px;
   }
 
   .wrapper-inzerat-sliders-rightbar {
@@ -250,7 +250,7 @@
 
 @media (max-width: 525px) {
   .wrapper-sliders {
-    height: 230px;
+    height: 330px;
   }
 
   .wrapper-sliders .swiper-button-prev,

@@ -414,6 +414,14 @@ function BazosContext({ children }) {
             return { ...category, icon: "./images/nabytek.svg" };
           }
 
+          if (category.slug === "sport") {
+            return { ...category, icon: "./images/sport.svg" };
+          }
+
+          if (category.slug === "obleceni") {
+            return { ...category, icon: "./images/obleceni.svg" };
+          }
+
           return category;
         });
 

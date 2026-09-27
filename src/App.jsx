@@ -12,41 +12,46 @@ import InzeratPage from "./pages/InzeratPage";
 import Pridatinzeratsubcategory from "./pages/Pridatinzeratsubcategory";
 import Pridatinzeratads from "./pages/Pridatinzeratads";
 import VshychniInzeratypage from "./pages/VshychniInzeratypage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="wrapper-app">
-      <Header />
+      <div className="wrapper-content-page">
+        <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/prihlaseni" element={<Prihlaseni />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/prihlaseni" element={<Prihlaseni />} />
 
-        <Route path="/oblibene" element={<Oblibene />} />
-        <Route path="/mojeinzeraty" element={<Mojeinzeraty />} />
-        <Route path="/pridat-inzerat" element={<PridatInzerat />} />
+          <Route path="/oblibene" element={<Oblibene />} />
+          <Route path="/mojeinzeraty" element={<Mojeinzeraty />} />
+          <Route path="/pridat-inzerat" element={<PridatInzerat />} />
 
-        <Route path="/:slug" element={<CategoryPage />} />
-        <Route path="/:slug/:subcategoryslug" element={<SubcategoyPage />} />
-        <Route
-          path="/:slug/:subcategoryslug/inzerat/:id"
-          element={<InzeratPage />}
-        />
+          <Route path="/:slug" element={<CategoryPage />} />
+          <Route path="/:slug/:subcategoryslug" element={<SubcategoyPage />} />
+          <Route
+            path="/:slug/:subcategoryslug/inzerat/:id"
+            element={<InzeratPage />}
+          />
 
-        <Route
-          path="/hodnoceni/:user_id/:name"
-          element={<VshychniInzeratypage />}
-        />
+          <Route
+            path="/hodnoceni/:user_id/:name"
+            element={<VshychniInzeratypage />}
+          />
 
-        <Route
-          path="/pridat-inzerat/:slug"
-          element={<Pridatinzeratsubcategory />}
-        />
-        <Route
-          path="/pridat-inzerat/:slug/:subcategorySlug"
-          element={<Pridatinzeratads />}
-        />
-      </Routes>
+          <Route
+            path="/pridat-inzerat/:slug"
+            element={<Pridatinzeratsubcategory />}
+          />
+          <Route
+            path="/pridat-inzerat/:slug/:subcategorySlug"
+            element={<Pridatinzeratads />}
+          />
+        </Routes>
+      </div>
+
+      <Footer />
     </div>
   );
 }

@@ -1,10 +1,15 @@
 .wrapper-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 30px 20px;
 }
 
 .wrapper-grids {
+  max-width: 900px;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   justify-content: center;
   gap: 5px;
 }
@@ -12,5 +17,11 @@
 @media (max-width: 533px) {
   .wrapper-home {
     padding: 10px;
+  }
+}
+
+@media (max-width: 395px) {
+  .wrapper-grids {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
