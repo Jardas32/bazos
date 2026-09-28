@@ -3,6 +3,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { db } from "../db.js";
+import auth from "../middleware/auth.js";
 import { sendEmailuser } from "../utils/nodemailer.js";
 import { sendNodeMailer } from "../utils/nodemailer.js";
 
@@ -146,6 +147,10 @@ router.post("/login", async (req, res) => {
 router.get("/me", async (req, res) => {
   try {
     const token = req.cookies.token;
+    console.log("========== /ME ==========");
+    console.log("Origin:", req.headers.origin);
+    console.log("Cookies:", req.cookies);
+    console.log("Token:", req.cookies.token ? "YES" : "NO");
 
     if (!token) {
       return res.status(401).json({

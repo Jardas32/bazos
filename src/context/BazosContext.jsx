@@ -251,7 +251,7 @@ function BazosContext({ children }) {
       }
     };
     authMe();
-  }, [isAuth]);
+  }, []);
 
   const register = async (e) => {
     e.preventDefault();
