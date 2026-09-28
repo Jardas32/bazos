@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-const API_URL = "https://bazos-yihu.onrender.com";
-
+// const API_URL = "https://bazos-yihu.onrender.com";
+const API_URL = "";
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
@@ -377,7 +377,7 @@ function BazosContext({ children }) {
     const getAllcategories = async () => {
       try {
         const res = await fetch(
-          "https://bazos-yihu.onrender.com/api/categories"
+          "/api/categories"
         );
 
         if (!res.ok) {

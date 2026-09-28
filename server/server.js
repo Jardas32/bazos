@@ -1,7 +1,12 @@
+import dotenv from "dotenv";
+
+dotenv.config({ path: "./server/.env" });
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
+import { fileURLToPath } from "url";
 
 import categoriesRouter from "./routers/categories.js";
 import subcategoriesRouter from "./routers/subcategories.js";
@@ -11,35 +16,33 @@ import favoritRouter from "./routers/favorites.js";
 
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// =========================
+// CORS
+// =========================
+
 app.use(
   cors({
-    origin: ["https://jardas32.github.io", "http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://bazos-yihu.onrender.com",
+    ],
     credentials: true,
   })
 );
 
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       const allowedOrigins = [
-//         "https://jardas32.github.io",
-//         "http://localhost:5173",
-//       ];
-
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//   })
-// );
+// =========================
+// Middleware
+// =========================
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+// =========================
+// API
+// =========================
 
 app.use("/api/categories", categoriesRouter);
 app.use("/api/subcategories", subcategoriesRouter);
@@ -47,11 +50,25 @@ app.use("/api/ads", adsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/favorites", favoritRouter);
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Bazos API is working",
-  });
+// =========================
+// React build
+// =========================
+
+const distPath = path.join(__dirname, "../dist");
+
+app.use(express.static(distPath));
+
+// =========================
+// React Router
+// =========================
+
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
 });
+
+// =========================
+// Server
+// =========================
 
 const PORT = process.env.PORT || 4000;
 

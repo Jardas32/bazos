@@ -17,9 +17,7 @@ function Pridatinzeratsubcategory() {
   useEffect(() => {
     const getSubCategories = async () => {
       try {
-        const res = await fetch(
-          `https://bazos-yihu.onrender.com/api/subcategories/category/${slug}`
-        );
+        const res = await fetch(`/api/subcategories/category/${slug}`);
 
         const data = await res.json();
 

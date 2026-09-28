@@ -10,13 +10,10 @@ function VshychniInzeratypage() {
   useEffect(() => {
     const getAllinzeratUser = async () => {
       try {
-        const res = await fetch(
-          `https://bazos-yihu.onrender.com/api/ads/allinzerat/${user_id}`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`/api/ads/allinzerat/${user_id}`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         const data = await res.json();
 
