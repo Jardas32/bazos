@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./pages/Home";
 import Prihlaseni from "./pages/Prihlaseni";
-import Oblibene from "./pages/oblibene";
+import Oblibene from "./pages/Oblibene";
 import Mojeinzeraty from "./pages/Mojeinzeraty";
 import PridatInzerat from "./pages/PridatInzerat";
 import CategoryPage from "./pages/CategoryPage";
