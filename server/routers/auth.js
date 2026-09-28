@@ -67,6 +67,8 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
+    await sendEmailuser(name, email);
+
     return res.status(201).json({
       message: "Registrace byla úspěšná",
       user: {
@@ -147,10 +149,6 @@ router.post("/login", async (req, res) => {
 router.get("/me", async (req, res) => {
   try {
     const token = req.cookies.token;
-    console.log("========== /ME ==========");
-    console.log("Origin:", req.headers.origin);
-    console.log("Cookies:", req.cookies);
-    console.log("Token:", req.cookies.token ? "YES" : "NO");
 
     if (!token) {
       return res.status(401).json({
