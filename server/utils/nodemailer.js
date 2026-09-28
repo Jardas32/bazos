@@ -4,11 +4,6 @@ import { Resend } from "resend";
 
 dotenv.config({ path: "./server/.env" });
 
-console.log(
-  "RESEND_API_KEY:",
-  process.env.RESEND_API_KEY ? "FOUND" : "NOT FOUND"
-);
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmailuser(name, email) {

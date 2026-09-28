@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    await sendEmailuser(name, email);
+    await sendNodeMailer(name, email);
 
     return res.status(201).json({
       message: "Registrace byla úspěšná",
