@@ -4,13 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 
 function VshychniInzeratypage() {
-  const { leftBarCategories, alladsuser, setAlladsuser } = useBazosContext();
-  const { subcategoryslug, user_id, name } = useParams();
+  const { leftBarCategories, alladsuser, setAlladsuser, API_URL } =
+    useBazosContext();
+  const { slug, subcategoryslug, user_id, name } = useParams();
 
   useEffect(() => {
     const getAllinzeratUser = async () => {
       try {
-        const res = await fetch(`/api/ads/allinzerat/${user_id}`, {
+        const res = await fetch(`${API_URL}/api/ads/allinzerat/${user_id}`, {
           method: "GET",
           credentials: "include",
         });
@@ -27,6 +28,8 @@ function VshychniInzeratypage() {
 
     getAllinzeratUser();
   }, [user_id]);
+
+  alladsuser.map((ad) => console.log(ad));
 
   return (
     <div className="wrapper-alladsuser">
@@ -59,31 +62,39 @@ function VshychniInzeratypage() {
         <div className="wrapper-alladsuser-grids">
           {alladsuser.map((ad) => (
             <div key={ad.id} className="wrapper-oblibene-card">
-              <div className="wrapper-oblibene-img">
-                <img
-                  className="oblibene-img"
-                  src={
-                    ad?.images
-                      ? `${ad?.images[0].image_url}`
-                      : "./images/empty.png"
-                  }
-                  alt="img"
-                />
-              </div>
+              <Link
+                to={`${ad.category_slug}/${ad.subcategory_slug}/inzerat/${ad.id}`}
+                className="oblibene-link-inzeratpage"
+              >
+                <div className="wrapper-oblibene-img">
+                  <img
+                    className="oblibene-img"
+                    src={
+                      ad?.images
+                        ? `${ad?.images[0].image_url}`
+                        : "./images/empty.png"
+                    }
+                    alt="img"
+                  />
+                </div>
 
-              <div className="wrapper-oblibene-body">
-                <h4 className="oblibene-title">{ad.title}</h4>
-                <p className="oblibene-description">
-                  {ad.description.slice(0, 60)}...
-                </p>
-                <span>
-                  {Number(ad.price).toLocaleString("cs-CZ", {
-                    style: "currency",
-                    currency: "CZK",
-                    maximumFractionDigits: 0,
-                  })}
-                </span>
-              </div>
+                <div className="wrapper-oblibene-body">
+                  <h4 className="oblibene-title">{ad.title}</h4>
+                  <p className="oblibene-description">
+                    {ad.description.slice(0, 60)}...
+                  </p>
+                  <div className="wrapper-city-price">
+                    <span className="oblibene-city">{ad.city}</span>
+                    <span className="oblibene-price">
+                      {Number(ad.price).toLocaleString("cs-CZ", {
+                        style: "currency",
+                        currency: "CZK",
+                        maximumFractionDigits: 0,
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>

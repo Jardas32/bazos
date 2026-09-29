@@ -22,6 +22,7 @@ function InzeratPage() {
     setSelectInzeratInfo,
     handleAddFavorites,
     myFavorites,
+    API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function InzeratPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `/api/subcategories/category/${slug}`
+          `${API_URL}/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
@@ -47,7 +48,7 @@ function InzeratPage() {
   useEffect(() => {
     const getAdsbyId = async () => {
       try {
-        const resAdsId = await fetch(`/api/ads/inzerat/${id}`);
+        const resAdsId = await fetch(`${API_URL}/api/ads/inzerat/${id}`);
 
         const dataAdsId = await resAdsId.json();
 

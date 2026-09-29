@@ -36,6 +36,11 @@ function App() {
           />
 
           <Route
+            path="/hodnoceni/:user_id/:name/:slug/:subcategoryslug/inzerat/:id"
+            element={<InzeratPage />}
+          />
+
+          <Route
             path="/hodnoceni/:user_id/:name"
             element={<VshychniInzeratypage />}
           />

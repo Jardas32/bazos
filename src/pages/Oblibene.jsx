@@ -47,7 +47,7 @@ function Oblibene() {
             {myFavorites.map((favorite) => (
               <div key={favorite.id} className="wrapper-oblibene-card">
                 <Link
-                  to={`/${slug}/${favorite.subcategory_slug}/inzerat/${favorite.id}`}
+                  to={`/${favorite.category_slug}/${favorite.subcategory_slug}/inzerat/${favorite.id}`}
                   className="oblibene-link-inzeratpage"
                 >
                   <div className="wrapper-oblibene-img">
@@ -69,8 +69,8 @@ function Oblibene() {
                     </p>
 
                     <div className="wrapper-city-price">
-                      <span className="oblibene-city" >{favorite.city}</span>
-                      <span className="oblibene-price" >
+                      <span className="oblibene-city">{favorite.city}</span>
+                      <span className="oblibene-price">
                         {Number(favorite.price).toLocaleString("cs-CZ", {
                           style: "currency",
                           currency: "CZK",

@@ -42,26 +42,35 @@ function Header() {
       <div className="wrapper-search-filter">
         <form className="formSearch">
           <div className="groupInput">
-            <label>Co:</label>
-            <input className="inputCo" type="text" placeholder="" />
-          </div>
-          <div className="wrapper-section">Všechny kategorie</div>
-
-          <div className="wrapper-price">
-            <div className="groupInput">
-              <label>Cena od:</label>
-              <input className="inputPrice" type="text" placeholder="" />
-              <span className="spase">-</span>
+            <div className="inputLabel">
+              <label>Co:</label>
+              <input className="inputCo" type="text" placeholder="" />
             </div>
 
-            <div className="groupInput">
-              <label>do:</label>
-              <input className="inputPrice" type="text" placeholder="" />
-              <span>Kč</span>
+            <button className="btn-hledat mobile">Hledat</button>
+          </div>
+
+          <div className="wrapper-section">
+            <div className="wrapper-select">
+              <div className="select-value">Všechny kategorie</div>
+            </div>
+
+            <div className="wrapper-price">
+              <div className="groupInput">
+                <label>Cena od:</label>
+                <input className="inputPrice" type="text" placeholder="" />
+                <span className="spase">-</span>
+              </div>
+
+              <div className="groupInput">
+                <label>do:</label>
+                <input className="inputPrice" type="text" placeholder="" />
+                <span>Kč</span>
+              </div>
             </div>
           </div>
 
-          <button className="btn-hledat">Hledat</button>
+          <button className="btn-hledat desktop">Hledat</button>
         </form>
       </div>
     </div>

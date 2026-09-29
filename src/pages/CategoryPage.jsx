@@ -19,6 +19,7 @@ function CategoryPage() {
     setLoading,
     status,
     setStatus,
+    API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
 
@@ -26,7 +27,7 @@ function CategoryPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `/api/subcategories/category/${slug}`
+          `${API_URL}/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
@@ -46,9 +47,9 @@ function CategoryPage() {
         let url;
 
         if (subcategoryslug) {
-          url = `/api/ads/subcategory/${subcategoryslug}`;
+          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}`;
         } else {
-          url = `/api/ads/category/${slug}`;
+          url = `${API_URL}/api/ads/category/${slug}`;
         }
 
         const resAds = await fetch(url);

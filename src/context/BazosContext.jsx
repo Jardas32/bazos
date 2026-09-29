@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// const API_URL = "https://bazos-yihu.onrender.com";
+// const API_URL = "http://localhost:4000";
 const API_URL = "";
 const BazosContextProvider = createContext();
 
@@ -376,9 +376,7 @@ function BazosContext({ children }) {
   useEffect(() => {
     const getAllcategories = async () => {
       try {
-        const res = await fetch(
-          "/api/categories"
-        );
+        const res = await fetch(`${API_URL}/api/categories`);
 
         if (!res.ok) {
           throw new Error(`HTTP error: ${res.status}`);
@@ -508,6 +506,7 @@ function BazosContext({ children }) {
     allCategories,
     deleteAccount,
     setDeleteAccount,
+    API_URL,
   };
 
   return (

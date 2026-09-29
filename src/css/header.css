@@ -112,6 +112,12 @@
   gap: 10px;
 }
 
+.inputLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .groupInput label {
   color: #fff;
 }
@@ -125,6 +131,22 @@
 
 .wrapper-section {
   color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.wrapper-select {
+  background-color: #fff;
+  color: black;
+  padding: 4px 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.select-value {
+  font-size: 13px;
 }
 
 .wrapper-price {
@@ -144,7 +166,18 @@
   width: 40%;
 }
 
-.btn-hledat {
+.btn-hledat.desktop {
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  color: orangered;
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: 1px solid rgb(252, 234, 227);
+}
+
+.btn-hledat.mobile {
+  display: none;
   transition: all 0.3s;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
@@ -166,7 +199,23 @@
 
   .formSearch {
     justify-content: center;
-    gap: 20px;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 794px) {
+  .groupInput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-hledat.desktop {
+    display: none;
+  }
+
+  .btn-hledat.mobile {
+    display: flex;
   }
 }
 
@@ -204,6 +253,19 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-bottom: 10px;
+  }
+
+  .groupInput {
+    justify-content: space-between;
+  }
+
+  .formSearch {
+    justify-content: start;
+    gap: 5px;
+  }
+
+  .wrapper-section {
+    gap: 5px;
   }
 }
 
