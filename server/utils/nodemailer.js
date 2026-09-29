@@ -9,7 +9,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendEmailuser(name, email) {
   const { data, error } = await resend.emails.send({
     from: "Bazos <onboarding@resend.dev>",
-    to: email,
+    to: process.env.EMAIL_BAZOS,
     subject: "Děkujeme za registraci",
 
     text: `
@@ -95,9 +95,8 @@ Bazoš.cz
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  family: 4,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_BAZOS,
     pass: process.env.SMTP_PASSWORD,
