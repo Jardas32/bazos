@@ -30,6 +30,7 @@ function App() {
 
           <Route path="/:slug" element={<CategoryPage />} />
           <Route path="/:slug/:subcategoryslug" element={<SubcategoyPage />} />
+          
           <Route
             path="/:slug/:subcategoryslug/inzerat/:id"
             element={<InzeratPage />}
@@ -37,6 +38,11 @@ function App() {
 
           <Route
             path="/hodnoceni/:user_id/:name/:slug/:subcategoryslug/inzerat/:id"
+            element={<InzeratPage />}
+          />
+
+          <Route
+            path="/vyhledavani/:slug/:subcategoryslug/inzerat/:id"
             element={<InzeratPage />}
           />
 

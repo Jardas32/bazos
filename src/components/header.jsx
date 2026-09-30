@@ -1,18 +1,33 @@
 import "../css/header.css";
 import { Link } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
+import { IoIosArrowDown } from "react-icons/io";
 
 function Header() {
-  const { me, isAuth } = useBazosContext();
+  const {
+    me,
+    isAuth,
+    searchResult,
+    setSearchResult,
+    searchTitle,
+    setSearchTitle,
+    openSearchResult,
+    setOpenSearchResult,
+    openSelectCategory,
+    setOpenSelectCategory,
+    selectRubrika,
+    setSelectRubrika,
+    allCategories,
+  } = useBazosContext();
 
   return (
     <div className="wrapper-header">
       <div className="wrapper-header-top">
         <div className="wrapper-logo">
-          <Link to="/">
+          <Link onClick={() => setSelectRubrika("Všechny rubriky")} to="/">
             <img
               className="logo-icon"
-              src="./images/Bazos-login.png"
+              src="./images/LogoFinal.png"
               alt="logo"
             />
           </Link>
@@ -44,7 +59,49 @@ function Header() {
           <div className="groupInput">
             <div className="inputLabel">
               <label>Co:</label>
-              <input className="inputCo" type="text" placeholder="" />
+              <input
+                value={searchTitle}
+                onChange={(e) => setSearchTitle(e.target.value)}
+                className="inputCo"
+                type="text"
+                placeholder=""
+              />
+
+              <button
+                onClick={() => {
+                  setSearchTitle("");
+                  setSearchResult([]);
+                  setOpenSearchResult(false);
+                }}
+                className="btn-clearSearch"
+              >
+                X
+              </button>
+
+              <div
+                className={`wrapper-header-searchresult ${
+                  openSearchResult ? "active" : ""
+                }`}
+              >
+                <div className="wrapper-header-searchresult-scroll">
+                  {searchResult.map((result) => (
+                    <Link
+                      onClick={() => {
+                        setSearchTitle("");
+                        setSearchResult([]);
+                        setOpenSearchResult(false);
+                      }}
+                      to={`/vyhledavani/${result.category_slug}/${result.subcategory_slug}/inzerat/${result.id}`}
+                      className="link-result"
+                      key={result?.id}
+                    >
+                      {result?.title?.length > 23
+                        ? `${result?.title.slice(0, 23)}...`
+                        : `${result?.title}`}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <button className="btn-hledat mobile">Hledat</button>
@@ -52,7 +109,35 @@ function Header() {
 
           <div className="wrapper-section">
             <div className="wrapper-select">
-              <div className="select-value">Všechny kategorie</div>
+              <div
+                onClick={() => setOpenSelectCategory((prev) => !prev)}
+                className="select-value"
+              >
+                {selectRubrika}
+              </div>
+              <IoIosArrowDown
+                className={`arrowDown ${openSelectCategory ? "active" : ""}`}
+              />
+
+              <div
+                className={`wrapper-options ${
+                  openSelectCategory ? "active" : ""
+                }`}
+              >
+                {allCategories.map((rubrika) => (
+                  <Link
+                    to={`/${rubrika.slug}`}
+                    onClick={() => {
+                      setSelectRubrika(rubrika.name);
+                      setOpenSelectCategory(false);
+                    }}
+                    key={rubrika.id}
+                    className="options"
+                  >
+                    {rubrika.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <div className="wrapper-price">

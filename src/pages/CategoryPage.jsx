@@ -19,6 +19,7 @@ function CategoryPage() {
     setLoading,
     status,
     setStatus,
+    selectRubrika,
     API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
@@ -38,7 +39,7 @@ function CategoryPage() {
       }
     };
     getSubCategories();
-  }, [slug]);
+  }, [slug, selectRubrika]);
 
   useEffect(() => {
     const getCategoryAds = async () => {

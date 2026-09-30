@@ -235,17 +235,7 @@ router.post(
 router.delete("/inzerat/delete/:id", auth, async (req, res) => {
   const { id } = req.params;
 
-  // const token = req.cookies.token;
-
-  // if (!token) {
-  //   return res.status(401).json({
-  //     message: "Nejste přihlášen.",
-  //   });
-  // }
-
   try {
-    // const decode = jwt.verify(token, process.env.JWT_SECRET);
-
     const userId = req.user.userId;
 
     const [images] = await db.query(
@@ -518,6 +508,76 @@ router.get("/allinzerat/:user_id", async (req, res) => {
     console.log(err);
 
     res.status(401).json({ message: "Chyba serveru...!" });
+  }
+});
+
+// searchTitle
+
+router.get("/:search", async (req, res) => {
+  const { search } = req.params;
+
+  try {
+    const [searchResult] = await db.query(
+      `SELECT 
+       ads.*,
+       users.name AS seller_name,
+       users.email AS seller_email,
+
+       subcategories.name AS subcategory_name,
+       subcategories.slug AS subcategory_slug,
+
+       categories.name AS category_name,
+       categories.slug AS category_slug,
+
+        JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'id', ad_images.id,
+            'image_url', ad_images.image_url
+          )
+        ) AS images
+
+       FROM ads
+
+       INNER JOIN users ON ads.user_id = users.id
+
+       INNER JOIN subcategories
+       ON ads.subcategory_id = subcategories.id
+
+       INNER JOIN categories
+       ON subcategories.categories_id = categories.id
+
+       LEFT JOIN ad_images ON ad_images.ad_id = ads.id
+
+       WHERE title LIKE  ?
+
+        GROUP BY
+        ads.id,
+        ads.title,
+        ads.description,
+        ads.price,
+        ads.city,
+        ads.postal_code,
+        ads.views,
+        ads.created_at,
+        users.name,
+        subcategories.name,
+        subcategories.slug,
+        categories.name,
+        categories.slug
+
+        ORDER BY ads.created_at ASC
+      `,
+      [`%${search}%`]
+    );
+
+    if (searchResult.length === 0) {
+      return res.status(404).json({ message: "Inzeráty nebyly nalezeny...!" });
+    }
+
+    res.status(200).json(searchResult);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

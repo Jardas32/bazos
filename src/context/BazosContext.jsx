@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// const API_URL = "http://localhost:4000";
-const API_URL = "";
+const API_URL = "http://localhost:4000";
+// const API_URL = "";
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
@@ -39,6 +39,11 @@ function BazosContext({ children }) {
   const [alladsuser, setAlladsuser] = useState([]);
   const [authLoading, setAuthLoading] = useState(true);
   const [deleteAccount, setDeleteAccount] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
+  const [openSearchResult, setOpenSearchResult] = useState(false);
+  const [openSelectCategory, setOpenSelectCategory] = useState(false);
+  const [selectRubrika, setSelectRubrika] = useState("Všechny rubriky");
   const navigate = useNavigate();
 
   const handleFiles = (e) => {
@@ -434,6 +439,33 @@ function BazosContext({ children }) {
     getAllcategories();
   }, []);
 
+  // serachTitle
+
+  useEffect(() => {
+    const getSearchTitle = async () => {
+      if (!searchTitle) return;
+
+      try {
+        const res = await fetch(`${API_URL}/api/ads/${searchTitle}`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setSearchResult(data);
+          setOpenSearchResult(true);
+        } else {
+          setSearchResult([{ id: 1, title: data.message }]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSearchTitle();
+  }, [searchTitle]);
+
   const values = {
     subCategories,
     setSubCategories,
@@ -506,6 +538,16 @@ function BazosContext({ children }) {
     allCategories,
     deleteAccount,
     setDeleteAccount,
+    searchResult,
+    setSearchResult,
+    searchTitle,
+    setSearchTitle,
+    openSearchResult,
+    setOpenSearchResult,
+    openSelectCategory,
+    setOpenSelectCategory,
+    selectRubrika,
+    setSelectRubrika,
     API_URL,
   };
 
