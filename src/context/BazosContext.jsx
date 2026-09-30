@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-const API_URL = "http://localhost:4000";
-// const API_URL = "";
+// const API_URL = "http://localhost:4000";
+const API_URL = "";
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
