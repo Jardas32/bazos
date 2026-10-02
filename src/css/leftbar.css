@@ -46,6 +46,12 @@
   font-weight: 600;
 }
 
+@media (max-width: 794px) {
+  .wrapper-subcategorie {
+    display: none;
+  }
+}
+
 @media (max-width: 693px) {
   .list-category {
     width: 100%;

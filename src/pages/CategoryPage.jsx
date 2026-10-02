@@ -80,15 +80,22 @@ function CategoryPage() {
 
       <Status status={status} setStatus={setStatus} />
 
-      <div className="wrapper-grid-adds">
-        {loading ? (
-          <LoadingComponent />
-        ) : ads.length === 0 ? (
-          <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
-        ) : (
-          ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
-        )}
+      <div className="wrapper-leftgrids">
+        <div className="wrapper-btn-grids-adslength">
+          <span>Zobrazeno inzerátů {ads.length}</span>
+        </div>
+
+        <div className="wrapper-grid-adds">
+          {loading ? (
+            <LoadingComponent />
+          ) : ads.length === 0 ? (
+            <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
+          ) : (
+            ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
+          )}
+        </div>
       </div>
+      
     </div>
   );
 }

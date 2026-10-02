@@ -201,7 +201,7 @@
 }
 
 .wrapper-section {
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   color: #fff;
   display: flex;
@@ -209,6 +209,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+}
+
+.wrapper-group-select {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.wrapper-select.mobile {
+  display: none;
 }
 
 .wrapper-select {
@@ -284,6 +294,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .spase {
@@ -345,6 +356,10 @@
   .btn-hledat.mobile {
     display: flex;
   }
+
+  .wrapper-select.mobile {
+    display: flex;
+  }
 }
 
 @media (max-width: 550px) {
@@ -397,6 +412,10 @@
 
   .link-result {
     font-size: 12px;
+  }
+
+  .wrapper-price {
+    gap: 30px;
   }
 }
 

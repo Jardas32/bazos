@@ -8,7 +8,7 @@ function Cardcategories({ category }) {
   return (
     <div className="wrapper-card-categories">
       <Link
-        onClick={() => setSelectRubrika(category.name)}
+        onClick={() => setSelectRubrika(category.slug)}
         to={`/${category.slug}`}
         className="link-subcategories"
       >

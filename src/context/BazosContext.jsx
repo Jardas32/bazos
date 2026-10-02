@@ -44,6 +44,8 @@ function BazosContext({ children }) {
   const [openSearchResult, setOpenSearchResult] = useState(false);
   const [openSelectCategory, setOpenSelectCategory] = useState(false);
   const [selectRubrika, setSelectRubrika] = useState("Všechny rubriky");
+  const [openSelectKategorie, setOpenSelectKategorie] = useState(false);
+  const [selectKategorie, setSelectKategorie] = useState("Všechny kategorie");
   const navigate = useNavigate();
 
   const handleFiles = (e) => {
@@ -548,6 +550,10 @@ function BazosContext({ children }) {
     setOpenSelectCategory,
     selectRubrika,
     setSelectRubrika,
+    openSelectKategorie,
+    setOpenSelectKategorie,
+    setSelectKategorie,
+    selectKategorie,
     API_URL,
   };
 

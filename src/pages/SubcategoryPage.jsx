@@ -19,6 +19,9 @@ function SubcategoryPage() {
     setLoading,
     status,
     setStatus,
+    selectRubrika,
+    selectKategorie,
+    API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
 
@@ -26,7 +29,7 @@ function SubcategoryPage() {
     const getSubCategories = async () => {
       try {
         const resSubcategories = await fetch(
-          `/api/subcategories/category/${slug}`
+          `${API_URL}/api/subcategories/category/${slug}`
         );
 
         const dataSubcategories = await resSubcategories.json();
@@ -37,7 +40,7 @@ function SubcategoryPage() {
       }
     };
     getSubCategories();
-  }, [slug]);
+  }, [slug, selectRubrika]);
 
   useEffect(() => {
     const getCategoryAds = async () => {
@@ -45,10 +48,10 @@ function SubcategoryPage() {
       try {
         let url;
 
-        if (subcategoryslug) {
-          url = `/api/ads/subcategory/${subcategoryslug}`;
+        if (subcategoryslug || selectKategorie) {
+          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}`;
         } else {
-          url = `/api/ads/category/${slug}`;
+          url = `${API_URL}/api/ads/category/${slug}`;
         }
 
         const resAds = await fetch(url);
@@ -66,7 +69,7 @@ function SubcategoryPage() {
     };
 
     getCategoryAds();
-  }, [slug, subcategoryslug]);
+  }, [slug, subcategoryslug, selectKategorie]);
 
   return (
     <div className="wrapper-categorypage">
@@ -78,14 +81,20 @@ function SubcategoryPage() {
 
       <Status status={status} setStatus={setStatus} />
 
-      <div className="wrapper-grid-adds">
-        {loading ? (
-          <LoadingComponent />
-        ) : ads.length === 0 ? (
-          <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
-        ) : (
-          ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
-        )}
+      <div className="wrapper-leftgrids">
+        <div className="wrapper-btn-grids-adslength">
+          <span>Zobrazeno inzerátů {ads.length}</span>
+        </div>
+
+        <div className="wrapper-grid-adds">
+          {loading ? (
+            <LoadingComponent />
+          ) : ads.length === 0 ? (
+            <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
+          ) : (
+            ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
+          )}
+        </div>
       </div>
     </div>
   );

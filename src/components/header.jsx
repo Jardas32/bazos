@@ -18,7 +18,14 @@ function Header() {
     selectRubrika,
     setSelectRubrika,
     allCategories,
+    openSelectKategorie,
+    setOpenSelectKategorie,
+    setSelectKategorie,
+    selectKategorie,
+    subcategorypage,
   } = useBazosContext();
+
+  console.log(subcategorypage);
 
   return (
     <div className="wrapper-header">
@@ -108,35 +115,72 @@ function Header() {
           </div>
 
           <div className="wrapper-section">
-            <div className="wrapper-select">
-              <div
-                onClick={() => setOpenSelectCategory((prev) => !prev)}
-                className="select-value"
-              >
-                {selectRubrika}
-              </div>
-              <IoIosArrowDown
-                className={`arrowDown ${openSelectCategory ? "active" : ""}`}
-              />
+            <div className="wrapper-group-select">
+              <div className="wrapper-select">
+                <div
+                  onClick={() => {
+                    setOpenSelectCategory((prev) => !prev);
+                    setSelectKategorie("Všechny kategorie");
+                  }}
+                  className="select-value"
+                >
+                  {selectRubrika}
+                </div>
+                <IoIosArrowDown
+                  className={`arrowDown ${openSelectCategory ? "active" : ""}`}
+                />
 
-              <div
-                className={`wrapper-options ${
-                  openSelectCategory ? "active" : ""
-                }`}
-              >
-                {allCategories.map((rubrika) => (
-                  <Link
-                    to={`/${rubrika.slug}`}
-                    onClick={() => {
-                      setSelectRubrika(rubrika.name);
-                      setOpenSelectCategory(false);
-                    }}
-                    key={rubrika.id}
-                    className="options"
-                  >
-                    {rubrika.name}
-                  </Link>
-                ))}
+                <div
+                  className={`wrapper-options ${
+                    openSelectCategory ? "active" : ""
+                  }`}
+                >
+                  {allCategories.map((rubrika) => (
+                    <Link
+                      to={`/${rubrika.slug}`}
+                      onClick={() => {
+                        setSelectRubrika(rubrika.slug);
+                        setOpenSelectCategory(false);
+                      }}
+                      key={rubrika.id}
+                      className="options"
+                    >
+                      {rubrika.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="wrapper-select mobile">
+                <div
+                  onClick={() => setOpenSelectKategorie((prev) => !prev)}
+                  className="select-value"
+                >
+                  {selectKategorie}
+                </div>
+                <IoIosArrowDown
+                  className={`arrowDown ${openSelectKategorie ? "active" : ""}`}
+                />
+
+                <div
+                  className={`wrapper-options ${
+                    openSelectKategorie ? "active" : ""
+                  }`}
+                >
+                  {subcategorypage.map((category) => (
+                    <Link
+                      to={`/${selectRubrika}/${category.slug}`}
+                      onClick={() => {
+                        setSelectKategorie(category.slug);
+                        setOpenSelectKategorie(false);
+                      }}
+                      key={category.id}
+                      className="options"
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -144,7 +188,6 @@ function Header() {
               <div className="groupInput">
                 <label>Cena od:</label>
                 <input className="inputPrice" type="text" placeholder="" />
-                <span className="spase">-</span>
               </div>
 
               <div className="groupInput">
