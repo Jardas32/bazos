@@ -6,6 +6,7 @@ import Cardadds from "../components/Cardadds";
 import LeftBar from "../components/LeftBar";
 import LoadingComponent from "../components/LoadingComponent";
 import Status from "../components/Status";
+import Backlink from "../components/BackLink";
 
 function CategoryPage() {
   const {
@@ -70,32 +71,45 @@ function CategoryPage() {
     getCategoryAds();
   }, [slug, subcategoryslug]);
 
+  const items = [
+    {
+      name: "Hlavní stránka",
+      path: "/",
+    },
+    {
+      name: `${slug}`,
+    },
+  ];
+
   return (
     <div className="wrapper-categorypage">
-      <LeftBar
-        subCategories={subcategorypage}
-        slug={slug}
-        subcategoryslug={subcategoryslug}
-      />
+      <Backlink items={items} />
 
-      <Status status={status} setStatus={setStatus} />
+      <div className="wrapper-categorypage-content">
+        <LeftBar
+          subCategories={subcategorypage}
+          slug={slug}
+          subcategoryslug={subcategoryslug}
+        />
 
-      <div className="wrapper-leftgrids">
-        <div className="wrapper-btn-grids-adslength">
-          <span>Zobrazeno inzerátů {ads.length}</span>
-        </div>
+        <Status status={status} setStatus={setStatus} />
 
-        <div className="wrapper-grid-adds">
-          {loading ? (
-            <LoadingComponent />
-          ) : ads.length === 0 ? (
-            <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
-          ) : (
-            ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
-          )}
+        <div className="wrapper-leftgrids">
+          <div className="wrapper-btn-grids-adslength">
+            <span>Zobrazeno inzerátů {ads.length}</span>
+          </div>
+
+          <div className="wrapper-grid-adds">
+            {loading ? (
+              <LoadingComponent />
+            ) : ads.length === 0 ? (
+              <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
+            ) : (
+              ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
+            )}
+          </div>
         </div>
       </div>
-      
     </div>
   );
 }

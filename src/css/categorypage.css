@@ -1,6 +1,13 @@
 .wrapper-categorypage {
   width: 100%;
-  padding: 30px 20px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapper-categorypage-content {
+  width: 100%;
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 20px;
@@ -50,10 +57,14 @@
 
 @media (max-width: 794px) {
   .wrapper-categorypage {
+    padding: 0 10px;
+  }
+
+  .wrapper-categorypage-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px;
+    padding: 0px;
   }
 
   .wrapper-leftgrids {
@@ -84,6 +95,10 @@
 }
 
 @media (max-width: 430px) {
+  .wrapper-categorypage {
+    gap: 10px;
+  }
+
   .wrapper-grid-adds {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px 5px;
