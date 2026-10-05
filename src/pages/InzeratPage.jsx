@@ -24,6 +24,7 @@ function InzeratPage() {
     handleAddFavorites,
     myFavorites,
     setQuaryRubrika,
+    isAuth,
     API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
@@ -205,6 +206,11 @@ function InzeratPage() {
                     }
 
                     if (info.id === 2) {
+                      if (!isAuth) {
+                        navigate("/prihlaseni");
+                        return;
+                      }
+
                       handleAddFavorites(selectAds?.id);
                     }
                   }}

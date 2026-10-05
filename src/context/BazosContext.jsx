@@ -5,6 +5,7 @@ const API_URL = "";
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
+  const navigate = useNavigate();
   const [subCategories, setSubCategories] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [ads, setAds] = useState([]);
@@ -46,12 +47,35 @@ function BazosContext({ children }) {
   const [selectRubrika, setSelectRubrika] = useState("Všechny rubriky");
   const [openSelectKategorie, setOpenSelectKategorie] = useState(false);
   const [selectKategorie, setSelectKategorie] = useState("Všechny kategorie");
-  const navigate = useNavigate();
   const [searchHledat, setSearchHledat] = useState("");
   const [cenaod, setCenaod] = useState("");
   const [cenado, setCenado] = useState("");
   const [quaryRubrika, setQuaryRubrika] = useState("");
   const [quaryKategorie, setQuaryKategorie] = useState("");
+  const [allAds, setAllAds] = useState([]);
+
+  // allAds
+
+  useEffect(() => {
+    const getAllAds = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/ads/all`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setAllAds(data);
+        }
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllAds();
+  }, []);
 
   // filter
 
@@ -609,6 +633,7 @@ function BazosContext({ children }) {
     handleFilterAds,
     setQuaryRubrika,
     setQuaryKategorie,
+    allAds,
   };
 
   return (

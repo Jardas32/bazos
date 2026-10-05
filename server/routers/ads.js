@@ -23,6 +23,17 @@ const router = express.Router();
 
 // const upload = multer({ storage });
 
+router.get("/all", async (req, res) => {
+  try {
+    const [allAds] = await db.query(`SELECT * FROM ads`);
+
+    res.json(allAds);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Chyba serveru...!" });
+  }
+});
+
 router.get("/category/:categorySlug", async (req, res) => {
   const { categorySlug } = req.params;
 

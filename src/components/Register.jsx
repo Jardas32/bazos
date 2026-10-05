@@ -45,7 +45,7 @@ function Register() {
           />
 
           <span>Souhlasím s</span>
-          <Link>podmínkami serveru Bazos.cz.</Link>
+          <Link>podmínkami serveru Mybazar.cz</Link>
         </div>
 
         <p style={{ color: "red", fontSize: "13px" }} className="error">

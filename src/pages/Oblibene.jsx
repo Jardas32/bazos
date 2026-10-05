@@ -56,7 +56,7 @@ function Oblibene() {
                     <img
                       className="oblibene-img"
                       src={
-                        favorite?.images
+                        favorite?.images[0].image_url !== null
                           ? `${favorite?.images[0].image_url}`
                           : "./images/empty.png"
                       }
