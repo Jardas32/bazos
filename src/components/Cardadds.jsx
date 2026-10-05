@@ -6,11 +6,7 @@ import { IoIosHeart } from "react-icons/io";
 
 function Cardadds({ ad }) {
   const { slug } = useParams();
-  const {
-    isAuth,
-    handleAddFavorites,
-    myFavorites,
-  } = useBazosContext();
+  const { isAuth, handleAddFavorites, myFavorites } = useBazosContext();
   const inFavorits = myFavorites.find((f) => f.id === ad.id);
 
   return (
@@ -25,7 +21,9 @@ function Cardadds({ ad }) {
       )}
 
       <Link
-        to={`/${slug}/${ad.subcategory_slug}/inzerat/${ad.id}`}
+        to={`/${slug || ad.category_slug}/${ad.subcategory_slug}/inzerat/${
+          ad.id
+        }`}
         className="link-inzeratpage"
       >
         <div className="wrapper-img-card-adds">

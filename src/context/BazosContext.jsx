@@ -47,6 +47,51 @@ function BazosContext({ children }) {
   const [openSelectKategorie, setOpenSelectKategorie] = useState(false);
   const [selectKategorie, setSelectKategorie] = useState("Všechny kategorie");
   const navigate = useNavigate();
+  const [searchHledat, setSearchHledat] = useState("");
+  const [cenaod, setCenaod] = useState("");
+  const [cenado, setCenado] = useState("");
+  const [quaryRubrika, setQuaryRubrika] = useState("");
+  const [quaryKategorie, setQuaryKategorie] = useState("");
+
+  // filter
+
+  useEffect(() => {
+    if (selectRubrika !== "Všechny rubriky") {
+      setQuaryRubrika(selectRubrika);
+    }
+
+    if (selectKategorie !== "Všechny kategorie") {
+      setQuaryKategorie(selectKategorie);
+    }
+  }, [selectRubrika, selectKategorie]);
+
+  const handleFilterAds = async (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+
+    if (searchHledat) {
+      params.set("hledat", searchHledat);
+    }
+
+    if (quaryRubrika) {
+      params.set("rubrika", quaryRubrika);
+    }
+
+    if (quaryKategorie) {
+      params.set("kategorie", quaryKategorie);
+    }
+
+    if (cenaod) {
+      params.set("cenaod", cenaod);
+    }
+
+    if (cenado) {
+      params.set("cenado", cenado);
+    }
+
+    navigate(`/search?${params.toString()}`);
+  };
 
   const handleFiles = (e) => {
     const file = Array.from(e.target.files);
@@ -555,6 +600,15 @@ function BazosContext({ children }) {
     setSelectKategorie,
     selectKategorie,
     API_URL,
+    searchHledat,
+    setSearchHledat,
+    cenaod,
+    setCenaod,
+    cenado,
+    setCenado,
+    handleFilterAds,
+    setQuaryRubrika,
+    setQuaryKategorie,
   };
 
   return (

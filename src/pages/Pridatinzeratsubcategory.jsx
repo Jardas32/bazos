@@ -10,6 +10,7 @@ function Pridatinzeratsubcategory() {
     setSelectSubcategory,
     allSubcategorie,
     setAllsubcategorie,
+    setQuaryRubrika,
   } = useBazosContext();
   const { slug, subcategorySlug } = useParams();
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ function Pridatinzeratsubcategory() {
           {leftBarCategories.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category.slug}`}
                 className={`link-category ${
                   category.slug === subcategorySlug ? "active" : ""

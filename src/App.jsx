@@ -12,6 +12,7 @@ import InzeratPage from "./pages/InzeratPage";
 import Pridatinzeratsubcategory from "./pages/Pridatinzeratsubcategory";
 import Pridatinzeratads from "./pages/Pridatinzeratads";
 import VshychniInzeratypage from "./pages/VshychniInzeratypage";
+import Searchpage from "./pages/Searchpage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -19,18 +20,19 @@ function App() {
     <div className="wrapper-app">
       <div className="wrapper-content-page">
         <Header />
-
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/prihlaseni" element={<Prihlaseni />} />
 
+          <Route path="/search" element={<Searchpage />} />
+
+          <Route path="/prihlaseni" element={<Prihlaseni />} />
           <Route path="/oblibene" element={<Oblibene />} />
           <Route path="/mojeinzeraty" element={<Mojeinzeraty />} />
           <Route path="/pridat-inzerat" element={<PridatInzerat />} />
 
           <Route path="/:slug" element={<CategoryPage />} />
           <Route path="/:slug/:subcategoryslug" element={<SubcategoyPage />} />
-          
+
           <Route
             path="/:slug/:subcategoryslug/inzerat/:id"
             element={<InzeratPage />}
@@ -55,6 +57,7 @@ function App() {
             path="/pridat-inzerat/:slug"
             element={<Pridatinzeratsubcategory />}
           />
+
           <Route
             path="/pridat-inzerat/:slug/:subcategorySlug"
             element={<Pridatinzeratads />}

@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import LoadingComponent from "../components/LoadingComponent";
 
 function Oblibene() {
-  const { slug, subcategoryslug } = useParams();
-  const { leftBarCategories, myFavorites, authLoading } = useBazosContext();
+  const { subcategoryslug } = useParams();
+  const { setQuaryRubrika, leftBarCategories, myFavorites, authLoading } =
+    useBazosContext();
 
   if (authLoading) {
     return <LoadingComponent />;
@@ -23,6 +24,7 @@ function Oblibene() {
           {leftBarCategories.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category.slug}`}
                 className={`link-category ${
                   category.slug === subcategoryslug ? "active" : ""

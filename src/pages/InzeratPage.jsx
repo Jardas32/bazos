@@ -23,6 +23,7 @@ function InzeratPage() {
     setSelectInzeratInfo,
     handleAddFavorites,
     myFavorites,
+    setQuaryRubrika,
     API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
@@ -92,6 +93,7 @@ function InzeratPage() {
             {leftBarCategories.map((category) => (
               <li key={category.id} className="subcategory">
                 <Link
+                  onClick={() => setQuaryRubrika(category.slug)}
                   to={`/${category.slug}`}
                   className={`link-category ${
                     category.slug === subcategoryslug ? "active" : ""

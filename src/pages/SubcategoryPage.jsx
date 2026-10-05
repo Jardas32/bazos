@@ -22,6 +22,7 @@ function SubcategoryPage() {
     setStatus,
     selectRubrika,
     selectKategorie,
+    setQuaryKategorie,
     API_URL,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();

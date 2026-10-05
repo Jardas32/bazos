@@ -4,9 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 
 function VshychniInzeratypage() {
-  const { leftBarCategories, alladsuser, setAlladsuser, API_URL } =
-    useBazosContext();
-  const { slug, subcategoryslug, user_id, name } = useParams();
+  const {
+    setQuaryRubrika,
+    leftBarCategories,
+    alladsuser,
+    setAlladsuser,
+    API_URL,
+  } = useBazosContext();
+  const { subcategoryslug, user_id, name } = useParams();
 
   useEffect(() => {
     const getAllinzeratUser = async () => {
@@ -40,6 +45,7 @@ function VshychniInzeratypage() {
           {leftBarCategories.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category.slug}`}
                 className={`link-category ${
                   category.slug === subcategoryslug ? "active" : ""

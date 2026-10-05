@@ -581,4 +581,94 @@ router.get("/:search", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  const { hledat, rubrika, kategorie, cenaod, cenado } = req.query;
+
+  try {
+    let sql = `
+    SELECT 
+     ads.id,
+     ads.title,
+     ads.description,
+     ads.price,
+     ads.city,
+     ads.postal_code,
+     ads.views,
+     ads.created_at,
+     users.name AS seller_name,
+
+        subcategories.name AS subcategory_name,
+        subcategories.slug AS subcategory_slug,
+
+        categories.name AS category_name,
+        categories.slug AS category_slug
+
+      FROM ads
+
+      INNER JOIN users
+        ON ads.user_id = users.id
+
+      INNER JOIN subcategories
+        ON ads.subcategory_id = subcategories.id
+
+      INNER JOIN categories
+        ON subcategories.categories_id = categories.id
+
+    WHERE 1=1
+    `;
+
+    const result = [];
+
+    if (rubrika && rubrika !== "") {
+      sql += ` AND categories.slug = ? `;
+      result.push(rubrika.trim());
+    }
+
+    if (kategorie && kategorie !== "") {
+      sql += ` AND subcategories.slug = ? `;
+      result.push(kategorie.trim());
+    }
+
+    if (hledat && hledat.trim()) {
+      sql += ` AND title LIKE ? `;
+      result.push(`%${hledat.trim()}%`);
+    }
+
+    if (cenaod !== undefined && cenaod !== "") {
+      sql += ` AND price >= ? `;
+      result.push(Number(cenaod));
+    }
+
+    if (cenado !== undefined && cenado !== "") {
+      sql += ` AND price <= ? `;
+      result.push(Number(cenado));
+    }
+
+    sql += ` ORDER BY id DESC`;
+
+    const [ads] = await db.query(sql, result);
+
+    const [images] = await db.query(
+      `
+        SELECT
+        id,
+        ad_id,
+        image_url
+        FROM ad_images
+        ORDER BY id ASC
+      `
+    );
+
+    const adsResult = ads.map((ad) => ({
+      ...ad,
+      images: images.filter((img) => img.ad_id === ad.id),
+    }));
+
+    res.json(adsResult);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Chyba při vyhledávání inzerátů." });
+  }
+});
+
 export default router;

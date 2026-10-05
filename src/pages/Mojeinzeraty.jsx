@@ -7,8 +7,14 @@ import LoadingComponent from "../components/LoadingComponent";
 
 function Mojeinzeraty() {
   const { subcategoryslug } = useParams();
-  const { leftBarCategories, me, myAds, handleAdsDelete, authLoading } =
-    useBazosContext();
+  const {
+    setQuaryRubrika,
+    leftBarCategories,
+    me,
+    myAds,
+    handleAdsDelete,
+    authLoading,
+  } = useBazosContext();
 
   if (authLoading) {
     return <LoadingComponent />;
@@ -23,6 +29,7 @@ function Mojeinzeraty() {
           {leftBarCategories?.map((category) => (
             <li key={category?.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category?.slug}`}
                 className={`link-category ${
                   category?.slug === subcategoryslug ? "active" : ""

@@ -23,15 +23,26 @@ function Header() {
     setSelectKategorie,
     selectKategorie,
     subcategorypage,
+    searchHledat,
+    setSearchHledat,
+    cenaod,
+    setCenaod,
+    cenado,
+    setCenado,
+    handleFilterAds,
   } = useBazosContext();
-
-  console.log(subcategorypage);
 
   return (
     <div className="wrapper-header">
       <div className="wrapper-header-top">
         <div className="wrapper-logo">
-          <Link onClick={() => setSelectRubrika("Všechny rubriky")} to="/">
+          <Link
+            onClick={() => {
+              setSelectRubrika("Všechny rubriky");
+              setSelectKategorie("Všechny kategorie");
+            }}
+            to="/"
+          >
             <img
               className="logo-icon"
               src="./images/LogoFinal.png"
@@ -62,13 +73,16 @@ function Header() {
       </div>
 
       <div className="wrapper-search-filter">
-        <form className="formSearch">
+        <form onSubmit={handleFilterAds} className="formSearch">
           <div className="groupInput">
             <div className="inputLabel">
               <label>Co:</label>
               <input
                 value={searchTitle}
-                onChange={(e) => setSearchTitle(e.target.value)}
+                onChange={(e) => {
+                  setSearchTitle(e.target.value);
+                  setSearchHledat(e.target.value);
+                }}
                 className="inputCo"
                 type="text"
                 placeholder=""
@@ -111,7 +125,13 @@ function Header() {
               </div>
             </div>
 
-            <button className="btn-hledat mobile">Hledat</button>
+            <button
+              onClick={() => setOpenSearchResult(false)}
+              type="submit"
+              className="btn-hledat mobile"
+            >
+              Hledat
+            </button>
           </div>
 
           <div className="wrapper-section">
@@ -187,18 +207,38 @@ function Header() {
             <div className="wrapper-price">
               <div className="groupInput">
                 <label>Cena od:</label>
-                <input className="inputPrice" type="text" placeholder="" />
+                <input
+                  min={0}
+                  value={cenaod}
+                  onChange={(e) => setCenaod(e.target.value)}
+                  className="inputPrice"
+                  type="text"
+                  placeholder=""
+                />
               </div>
 
               <div className="groupInput">
                 <label>do:</label>
-                <input className="inputPrice" type="text" placeholder="" />
+                <input
+                  min={0}
+                  value={cenado}
+                  onChange={(e) => setCenado(e.target.value)}
+                  className="inputPrice"
+                  type="text"
+                  placeholder=""
+                />
                 <span>Kč</span>
               </div>
             </div>
           </div>
 
-          <button className="btn-hledat desktop">Hledat</button>
+          <button
+            onClick={() => setOpenSearchResult(false)}
+            type="submit"
+            className="btn-hledat desktop"
+          >
+            Hledat
+          </button>
         </form>
       </div>
     </div>

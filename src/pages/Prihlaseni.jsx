@@ -16,6 +16,7 @@ function Prihlaseni() {
     deleteAcount,
     deleteAccount,
     setDeleteAccount,
+    setQuaryRubrika,
   } = useBazosContext();
 
   if (authLoading) {
@@ -31,6 +32,7 @@ function Prihlaseni() {
           {leftBarCategories.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category.slug}`}
                 className={`link-category ${
                   category.slug === subcategoryslug ? "active" : ""

@@ -21,6 +21,7 @@ function Pridatinzeratads() {
     setImages,
     handleFiles,
     loading,
+    setQuaryRubrika,
   } = useBazosContext();
   const { subcategoryslug } = useParams();
 
@@ -33,6 +34,7 @@ function Pridatinzeratads() {
           {leftBarCategories.map((category) => (
             <li key={category.id} className="subcategory">
               <Link
+                onClick={() => setQuaryRubrika(category.slug)}
                 to={`/${category.slug}`}
                 className={`link-category ${
                   category.slug === subcategoryslug ? "active" : ""
