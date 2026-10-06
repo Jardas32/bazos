@@ -15,7 +15,7 @@
 
 .wrapper-leftgrids {
   width: 100%;
-  padding: 0 20px;
+  padding-left: 20px;
   border-left: 1.5px dotted rgb(215, 215, 215);
 }
 
@@ -23,6 +23,9 @@
   background-color: rgba(255, 166, 0, 0.319);
   padding: 10px;
   border: 1px solid rgb(193, 193, 193);
+  display: flex;
+  align-items: center;
+  gap: 5px;
   border-radius: 4px;
 }
 
@@ -41,6 +44,11 @@
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   align-items: start;
   gap: 20px 10px;
+}
+
+.wrapper-grid-adds.active {
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
 .wrapper-empty {

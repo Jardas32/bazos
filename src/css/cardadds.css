@@ -21,7 +21,7 @@
 }
 
 .icon-add {
-  transition: 0.3s;
+  transition: all 0.3s;
   width: 20px;
   height: 20px;
   color: rgb(255, 255, 255);

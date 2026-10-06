@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { changeBtn } from "../data/data";
 // const API_URL = "http://localhost:4000";
 const API_URL = "";
 const BazosContextProvider = createContext();
@@ -53,6 +54,25 @@ function BazosContext({ children }) {
   const [quaryRubrika, setQuaryRubrika] = useState("");
   const [quaryKategorie, setQuaryKategorie] = useState("");
   const [allAds, setAllAds] = useState([]);
+  const [changeGrid, setChangeGrid] = useState(() => {
+    const getChangeGrid = localStorage.getItem("changeGrid");
+
+    return getChangeGrid ? JSON.parse(getChangeGrid) : false;
+  });
+
+  const [selectBtnChange, setSelectBtnChange] = useState(() => {
+    const getSelectbtn = localStorage.getItem("selectBtn");
+
+    return getSelectbtn ? JSON.parse(getSelectbtn) : changeBtn[1];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("selectBtn", JSON.stringify(selectBtnChange));
+  }, [selectBtnChange]);
+
+  useEffect(() => {
+    localStorage.setItem("changeGrid", JSON.stringify(changeGrid));
+  }, [changeGrid]);
 
   // allAds
 
@@ -69,7 +89,6 @@ function BazosContext({ children }) {
         if (res.ok) {
           setAllAds(data);
         }
-
       } catch (err) {
         console.log(err);
       }
@@ -634,6 +653,10 @@ function BazosContext({ children }) {
     setQuaryRubrika,
     setQuaryKategorie,
     allAds,
+    changeGrid,
+    setChangeGrid,
+    selectBtnChange,
+    setSelectBtnChange,
   };
 
   return (

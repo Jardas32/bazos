@@ -1,3 +1,6 @@
+import flex from "/images/list.gif";
+import grid from "/images/gallery.gif";
+
 export const datainzeratinfo = {
   leftList: [
     {
@@ -65,3 +68,16 @@ export const datainzeratinfo = {
     },
   ],
 };
+
+export const changeBtn = [
+  {
+    id: 1,
+    name: "flex",
+    icon: flex,
+  },
+  {
+    id: 2,
+    name: "grid",
+    icon: grid,
+  },
+];

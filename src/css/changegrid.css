@@ -1,0 +1,17 @@
+.wrapper-changegrid {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.changeBox {
+  transition: all 0.3s;
+  cursor: pointer;
+  display: flex;
+  border: 1px solid transparent;
+}
+
+.changeBox.active {
+  cursor: initial;
+  border: 1px solid grey;
+}

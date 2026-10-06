@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 import Cardadds from "../components/Cardadds";
+import Cardadsflex from "../components/Cardadsflex";
 import LeftBar from "../components/LeftBar";
 import LoadingComponent from "../components/LoadingComponent";
 import Status from "../components/Status";
 import Backlink from "../components/BackLink";
+import ChangeGrid from "../components/ChangeGrid";
 
 function CategoryPage() {
   const {
@@ -22,6 +24,7 @@ function CategoryPage() {
     setStatus,
     selectRubrika,
     API_URL,
+    changeGrid,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
 
@@ -96,16 +99,23 @@ function CategoryPage() {
 
         <div className="wrapper-leftgrids">
           <div className="wrapper-btn-grids-adslength">
+            <ChangeGrid />
             <span>Zobrazeno inzerátů {ads.length}</span>
           </div>
 
-          <div className="wrapper-grid-adds">
+          <div className={`wrapper-grid-adds ${changeGrid ? "active" : ""}`}>
             {loading ? (
               <LoadingComponent />
             ) : ads.length === 0 ? (
               <div className="wrapper-empty">Žádný inzerát nenalezen.</div>
             ) : (
-              ads.map((ad) => <Cardadds key={ad.id} ad={ad} />)
+              ads.map((ad) =>
+                changeGrid ? (
+                  <Cardadsflex key={ad.id} ad={ad} />
+                ) : (
+                  <Cardadds key={ad.id} ad={ad} />
+                )
+              )
             )}
           </div>
         </div>
