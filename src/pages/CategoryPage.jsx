@@ -9,6 +9,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import Status from "../components/Status";
 import Backlink from "../components/BackLink";
 import ChangeGrid from "../components/ChangeGrid";
+import Paginations from "../components/Pginations";
 
 function CategoryPage() {
   const {
@@ -25,6 +26,11 @@ function CategoryPage() {
     selectRubrika,
     API_URL,
     changeGrid,
+    setPages,
+    currentPage,
+    totalAds,
+    setTotalAds,
+    scrollTo,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
 
@@ -48,20 +54,27 @@ function CategoryPage() {
   useEffect(() => {
     const getCategoryAds = async () => {
       setLoading(true);
+      if (!currentPage) return;
+
       try {
         let url;
 
         if (subcategoryslug) {
-          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}`;
+          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}?page=${currentPage}`;
         } else {
-          url = `${API_URL}/api/ads/category/${slug}`;
+          url = `${API_URL}/api/ads/category/${slug}?page=${currentPage}`;
         }
 
         const resAds = await fetch(url);
 
-        const dataAds = await resAds.json();
-
-        setAds(dataAds);
+        if (resAds.ok) {
+          const dataAds = await resAds.json();
+          setAds(dataAds.ads);
+          setPages(dataAds.pagination.totalPages);
+          setTotalAds(dataAds.pagination.total);
+          scrollTo();
+        }
+        
       } catch (err) {
         console.log(err);
       } finally {
@@ -72,7 +85,7 @@ function CategoryPage() {
     };
 
     getCategoryAds();
-  }, [slug, subcategoryslug]);
+  }, [slug, subcategoryslug, currentPage]);
 
   const items = [
     {
@@ -100,7 +113,9 @@ function CategoryPage() {
         <div className="wrapper-leftgrids">
           <div className="wrapper-btn-grids-adslength">
             <ChangeGrid />
-            <span>Zobrazeno inzerátů {ads.length}</span>
+            <span>
+              Zobrazeno {ads.length} inzerátů z {totalAds}
+            </span>
           </div>
 
           <div className={`wrapper-grid-adds ${changeGrid ? "active" : ""}`}>
@@ -118,6 +133,8 @@ function CategoryPage() {
               )
             )}
           </div>
+
+          <Paginations />
         </div>
       </div>
     </div>

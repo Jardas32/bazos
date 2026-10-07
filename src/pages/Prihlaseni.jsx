@@ -3,6 +3,7 @@ import { useBazosContext } from "../context/BazosContext";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import LoadingComponent from "../components/LoadingComponent";
+import Backlink from "../components/BackLink";
 
 function Prihlaseni() {
   const { subcategoryslug } = useParams();
@@ -23,81 +24,95 @@ function Prihlaseni() {
     return <LoadingComponent />;
   }
 
+  const items = [
+    {
+      name: "Hlavní stránka",
+      path: "/",
+    },
+    {
+      name: "profile",
+    },
+  ];
+
   return (
-    <div className="wrapper-oblibenepage">
-      <div className="wrapper-subcategorie">
-        <h3 className="text-categories">Inzerce</h3>
+    <div className="wrapper-categorypage">
+      <Backlink items={items} />
 
-        <ul className="list-category">
-          {leftBarCategories.map((category) => (
-            <li key={category.id} className="subcategory">
-              <Link
-                onClick={() => setQuaryRubrika(category.slug)}
-                to={`/${category.slug}`}
-                className={`link-category ${
-                  category.slug === subcategoryslug ? "active" : ""
-                }`}
-              >
-                {category.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="wrapper-categorypage-content">
+        <div className="wrapper-subcategorie">
+          <h3 className="text-categories">Inzerce</h3>
 
-      <div className="wrapper-oblibene">
-        <div className="wrapper-oblibnee-top">Přihlášení</div>
-
-        {isAuth ? (
-          <div className="wrapper-profile-info">
-            <div className="profile-group">
-              <span>E-mail:</span>
-              <span>{me?.email}</span>
-            </div>
-
-            <div className="profile-group">
-              <span>Name:</span>
-              <span>{me?.name}</span>
-            </div>
-
-            <div className="wrapper-delete-acount">
-              <button onClick={logout} className="btn-odhlasitse">
-                Odhlásit se
-              </button>
-
-              <div className="wrapper-deleteaccount">
-                <button
-                  onClick={() => setDeleteAccount(true)}
-                  className="btn-delete-acount"
+          <ul className="list-category">
+            {leftBarCategories.map((category) => (
+              <li key={category.id} className="subcategory">
+                <Link
+                  onClick={() => setQuaryRubrika(category.slug)}
+                  to={`/${category.slug}`}
+                  className={`link-category ${
+                    category.slug === subcategoryslug ? "active" : ""
+                  }`}
                 >
-                  Smazat účet
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="wrapper-oblibene">
+          <div className="wrapper-oblibnee-top">Přihlášení</div>
+
+          {isAuth ? (
+            <div className="wrapper-profile-info">
+              <div className="profile-group">
+                <span>E-mail:</span>
+                <span>{me?.email}</span>
+              </div>
+
+              <div className="profile-group">
+                <span>Name:</span>
+                <span>{me?.name}</span>
+              </div>
+
+              <div className="wrapper-delete-acount">
+                <button onClick={logout} className="btn-odhlasitse">
+                  Odhlásit se
                 </button>
-                <div
-                  className={`wrapper-yesno ${deleteAccount ? "active" : ""}`}
-                >
-                  <p className="text-yesno">Opravdu chcete účet smazat?</p>
 
+                <div className="wrapper-deleteaccount">
                   <button
-                    onClick={() => deleteAcount()}
-                    className="btn-yesno left"
+                    onClick={() => setDeleteAccount(true)}
+                    className="btn-delete-acount"
                   >
-                    Ano
+                    Smazat účet
                   </button>
-                  <button
-                    onClick={() => setDeleteAccount(false)}
-                    className="btn-yesno"
+                  <div
+                    className={`wrapper-yesno ${deleteAccount ? "active" : ""}`}
                   >
-                    Ne
-                  </button>
+                    <p className="text-yesno">Opravdu chcete účet smazat?</p>
+
+                    <button
+                      onClick={() => deleteAcount()}
+                      className="btn-yesno left"
+                    >
+                      Ano
+                    </button>
+                    <button
+                      onClick={() => setDeleteAccount(false)}
+                      className="btn-yesno"
+                    >
+                      Ne
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : isLogin ? (
-          <Login />
-        ) : (
-          <Register />
-        )}
+          ) : isLogin ? (
+            <Login />
+          ) : (
+            <Register />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -14,9 +14,11 @@ function ChangeGrid() {
           onClick={() => {
             setSelectBtnChange(btn);
             setChangeGrid((prev) => {
-              if (btn.id === 2) return false;
-
-              return !prev;
+              if (btn.id === 1) {
+                return true;
+              } else if (btn.id === 2) {
+                return false;
+              }
             });
           }}
           className={`changeBox ${

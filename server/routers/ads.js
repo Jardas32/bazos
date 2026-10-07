@@ -37,6 +37,12 @@ router.get("/all", async (req, res) => {
 router.get("/category/:categorySlug", async (req, res) => {
   const { categorySlug } = req.params;
 
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+
+  const limit = 16;
+
+  const firstPages = (page - 1) * limit;
+
   if (!categorySlug) {
     return res.status(400).json({
       message: "categorySlug empty.",
@@ -44,7 +50,26 @@ router.get("/category/:categorySlug", async (req, res) => {
   }
 
   try {
-    // Получаем объявления
+    const [countResult] = await db.query(
+      `
+      SELECT COUNT(*) AS total
+      FROM ads
+
+      INNER JOIN subcategories
+        ON ads.subcategory_id = subcategories.id
+
+      INNER JOIN categories
+        ON subcategories.categories_id = categories.id
+
+      WHERE categories.slug = ?
+      `,
+      [categorySlug]
+    );
+
+    const total = countResult[0].total;
+
+    const totalPages = Math.ceil(total / limit);
+
     const [ads] = await db.query(
       `
       SELECT
@@ -79,29 +104,64 @@ router.get("/category/:categorySlug", async (req, res) => {
       WHERE categories.slug = ?
 
       ORDER BY ads.created_at DESC
+
+      LIMIT ? OFFSET ?
       `,
-      [categorySlug]
+      [categorySlug, limit, firstPages]
     );
 
-    // Получаем все фотографии
+    if (ads.length === 0) {
+      return res.json({
+        ads: [],
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNextPage: false,
+          hasPrevPage: page > 1,
+        },
+      });
+    }
+
+    const adIds = ads.map((ad) => ad.id);
+
+    const placeholders = adIds.map(() => "?").join(",");
+
     const [images] = await db.query(
       `
       SELECT
         id,
         ad_id,
         image_url
+
       FROM ad_images
+
+      WHERE ad_id IN (${placeholders})
+
       ORDER BY id ASC
-      `
+      `,
+      adIds
     );
 
-    // Добавляем фотографии к соответствующим объявлениям
     const result = ads.map((ad) => ({
       ...ad,
       images: images.filter((image) => image.ad_id === ad.id),
     }));
 
-    res.json(result);
+    res.json({
+      ads: result,
+
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages,
+
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (err) {
     console.log(err);
 
@@ -114,6 +174,12 @@ router.get("/category/:categorySlug", async (req, res) => {
 router.get("/subcategory/:subcategorySlug", async (req, res) => {
   const { subcategorySlug } = req.params;
 
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+
+  const limit = 16;
+
+  const firstPages = (page - 1) * limit;
+
   if (!subcategorySlug) {
     return res.status(400).json({
       message: "subcategorySlug empty.",
@@ -121,7 +187,26 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
   }
 
   try {
-    // Получаем объявления
+    const [countResult] = await db.query(
+      `
+      SELECT COUNT(*) AS total
+      FROM ads
+
+      INNER JOIN subcategories
+        ON ads.subcategory_id = subcategories.id
+
+      INNER JOIN categories
+        ON subcategories.categories_id = categories.id
+
+      WHERE subcategories.slug = ?
+      `,
+      [subcategorySlug]
+    );
+
+    const total = countResult[0].total;
+
+    const totalPages = Math.ceil(total / limit);
+
     const [ads] = await db.query(
       `
       SELECT
@@ -156,29 +241,64 @@ router.get("/subcategory/:subcategorySlug", async (req, res) => {
       WHERE subcategories.slug = ?
 
       ORDER BY ads.created_at DESC
+
+      LIMIT ? OFFSET ?
       `,
-      [subcategorySlug]
+      [subcategorySlug, limit, firstPages]
     );
 
-    // Получаем фотографии
+    if (ads.length === 0) {
+      return res.json({
+        ads: [],
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages,
+          hasNextPage: false,
+          hasPrevPage: page > 1,
+        },
+      });
+    }
+
+    const adIds = ads.map((ad) => ad.id);
+
+    const placeholders = adIds.map(() => "?").join(",");
+
     const [images] = await db.query(
       `
       SELECT
         id,
         ad_id,
         image_url
+
       FROM ad_images
+
+      WHERE ad_id IN (${placeholders})
+
       ORDER BY id ASC
-      `
+      `,
+      adIds
     );
 
-    // Добавляем фотографии к объявлениям
     const result = ads.map((ad) => ({
       ...ad,
       images: images.filter((image) => image.ad_id === ad.id),
     }));
 
-    res.json(result);
+    res.json({
+      ads: result,
+
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages,
+
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (err) {
     console.log(err);
 

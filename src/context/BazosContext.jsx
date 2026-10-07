@@ -59,12 +59,22 @@ function BazosContext({ children }) {
 
     return getChangeGrid ? JSON.parse(getChangeGrid) : false;
   });
-
   const [selectBtnChange, setSelectBtnChange] = useState(() => {
     const getSelectbtn = localStorage.getItem("selectBtn");
 
     return getSelectbtn ? JSON.parse(getSelectbtn) : changeBtn[1];
   });
+
+  const [pages, setPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalAds, setTotalAds] = useState(0);
+
+  const scrollTo = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     localStorage.setItem("selectBtn", JSON.stringify(selectBtnChange));
@@ -657,6 +667,13 @@ function BazosContext({ children }) {
     setChangeGrid,
     selectBtnChange,
     setSelectBtnChange,
+    pages,
+    setPages,
+    currentPage,
+    setCurrentPage,
+    totalAds,
+    setTotalAds,
+    scrollTo,
   };
 
   return (

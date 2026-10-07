@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 
 function LeftBar({ subCategories, slug, subcategoryslug }) {
-  const { setQuaryKategorie } = useBazosContext();
+  const { setQuaryKategorie, setCurrentPage } = useBazosContext();
 
   return (
     <div className="wrapper-subcategorie">
@@ -13,7 +13,10 @@ function LeftBar({ subCategories, slug, subcategoryslug }) {
         {subCategories.map((subcategory) => (
           <li key={subcategory.id} className="subcategory">
             <Link
-              onClick={() => setQuaryKategorie(subcategory.slug)}
+              onClick={() => {
+                setQuaryKategorie(subcategory.slug);
+                setCurrentPage(1);
+              }}
               to={`/${slug}/${subcategory.slug}`}
               className={`link-category ${
                 subcategory.slug === subcategoryslug ? "active" : ""

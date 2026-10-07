@@ -6,6 +6,8 @@ const router = express.Router();
 router.get("/category/:slug", async (req, res) => {
   const { slug } = req.params;
 
+  console.log(slug);
+
   try {
     const [subcategories] = await db.query(
       `SELECT subcategories.id, subcategories.name, subcategories.slug, categories.name AS category_name, categories.slug AS category_slug FROM subcategories INNER JOIN categories ON subcategories.categories_id = categories.id WHERE categories.slug = ? ORDER BY subcategories.name`,

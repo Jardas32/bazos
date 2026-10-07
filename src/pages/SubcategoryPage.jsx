@@ -9,6 +9,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import Status from "../components/Status";
 import Backlink from "../components/BackLink";
 import ChangeGrid from "../components/ChangeGrid";
+import Paginations from "../components/Pginations";
 
 function SubcategoryPage() {
   const {
@@ -26,6 +27,10 @@ function SubcategoryPage() {
     selectKategorie,
     API_URL,
     changeGrid,
+    setPages,
+    currentPage,
+    totalAds,
+    setTotalAds,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
 
@@ -60,9 +65,12 @@ function SubcategoryPage() {
 
         const resAds = await fetch(url);
 
-        const dataAds = await resAds.json();
-
-        setAds(dataAds);
+        if (resAds.ok) {
+          const dataAds = await resAds.json();
+          setAds(dataAds.ads);
+          setPages(dataAds.pagination.totalPages);
+          setTotalAds(dataAds.pagination.total);
+        }
       } catch (err) {
         console.log(err);
       } finally {
@@ -73,7 +81,7 @@ function SubcategoryPage() {
     };
 
     getCategoryAds();
-  }, [slug, subcategoryslug, selectKategorie]);
+  }, [slug, subcategoryslug, selectKategorie, currentPage]);
 
   const items = [
     {
@@ -105,7 +113,9 @@ function SubcategoryPage() {
         <div className="wrapper-leftgrids">
           <div className="wrapper-btn-grids-adslength">
             <ChangeGrid />
-            <span>Zobrazeno inzerátů {ads.length}</span>
+            <span>
+              Zobrazeno {ads.length} inzerátů z {totalAds}
+            </span>
           </div>
 
           <div className={`wrapper-grid-adds ${changeGrid ? "active" : ""}`}>
@@ -123,6 +133,8 @@ function SubcategoryPage() {
               )
             )}
           </div>
+
+          <Paginations />
         </div>
       </div>
     </div>

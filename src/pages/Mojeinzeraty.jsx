@@ -4,6 +4,7 @@ import { useBazosContext } from "../context/BazosContext";
 import { IoMdCloseCircle } from "react-icons/io";
 import emptyImg from "/images/empty.png";
 import LoadingComponent from "../components/LoadingComponent";
+import Backlink from "../components/BackLink";
 
 function Mojeinzeraty() {
   const { subcategoryslug } = useParams();
@@ -20,99 +21,112 @@ function Mojeinzeraty() {
     return <LoadingComponent />;
   }
 
+  const items = [
+    {
+      name: "Hlavní stránka",
+      path: "/",
+    },
+    {
+      name: "moje inzeráty",
+    },
+  ];
+
   return (
-    <div className="wrapper-mojeinzeraty">
-      <div className="wrapper-subcategorie">
-        <h3 className="text-categories">Inzerce</h3>
+    <div className="wrapper-categorypage">
+      <Backlink items={items} />
+      <div className="wrapper-categorypage-content">
+        <div className="wrapper-subcategorie">
+          <h3 className="text-categories">Inzerce</h3>
 
-        <ul className="list-category">
-          {leftBarCategories?.map((category) => (
-            <li key={category?.id} className="subcategory">
-              <Link
-                onClick={() => setQuaryRubrika(category.slug)}
-                to={`/${category?.slug}`}
-                className={`link-category ${
-                  category?.slug === subcategoryslug ? "active" : ""
-                }`}
-              >
-                {category?.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="profile">
-        <div className="wrapper-eddit">
-          <h4 className="myads">Moje inzeráty: {myAds?.length}</h4>
+          <ul className="list-category">
+            {leftBarCategories?.map((category) => (
+              <li key={category?.id} className="subcategory">
+                <Link
+                  onClick={() => setQuaryRubrika(category.slug)}
+                  to={`/${category?.slug}`}
+                  className={`link-category ${
+                    category?.slug === subcategoryslug ? "active" : ""
+                  }`}
+                >
+                  {category?.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <h4 className="uzivatel">Uživatel:</h4>
+        <div className="profile">
+          <div className="wrapper-eddit">
+            <h4 className="myads">Moje inzeráty: {myAds?.length}</h4>
+          </div>
 
-        {me ? (
-          <div className="wrapper-profile-info">
-            <div className="profile-group">
-              <span>E-mail:</span>
-              <span>{me?.email}</span>
-            </div>
-            <div className="profile-group">
-              <span>Name:</span>
-              <span>{me?.name}</span>
-            </div>
+          <h4 className="uzivatel">Uživatel:</h4>
 
-            <div className="wrapper-mojeinzeraty-grids">
-              <div className="wrapper-myads-grids">
-                {myAds?.map((ad) => (
-                  <div key={ad.id} className="wrapper-adds-card">
-                    <div className="link-inzeratpage">
-                      <div className="wrapper-img-card-adds">
-                        <span className="top">TOP</span>
-                        <IoMdCloseCircle
-                          onClick={() => handleAdsDelete(ad?.id)}
-                          className="btn-delete-myinzerat"
-                        />
-                        <img
-                          className="img-card-ads"
-                          src={
-                            ad?.images?.[0]?.image_url
-                              ? `${ad?.images?.[0]?.image_url}`
-                              : emptyImg
-                          }
-                          alt="icon-adds"
-                        />
+          {me ? (
+            <div className="wrapper-profile-info">
+              <div className="profile-group">
+                <span>E-mail:</span>
+                <span>{me?.email}</span>
+              </div>
+              <div className="profile-group">
+                <span>Name:</span>
+                <span>{me?.name}</span>
+              </div>
 
-                        <span className="city">{ad?.city}</span>
-                      </div>
+              <div className="wrapper-mojeinzeraty-grids">
+                <div className="wrapper-myads-grids">
+                  {myAds?.map((ad) => (
+                    <div key={ad.id} className="wrapper-adds-card">
+                      <div className="link-inzeratpage">
+                        <div className="wrapper-img-card-adds">
+                          <span className="top">TOP</span>
+                          <IoMdCloseCircle
+                            onClick={() => handleAdsDelete(ad?.id)}
+                            className="btn-delete-myinzerat"
+                          />
+                          <img
+                            className="img-card-ads"
+                            src={
+                              ad?.images?.[0]?.image_url
+                                ? `${ad?.images?.[0]?.image_url}`
+                                : emptyImg
+                            }
+                            alt="icon-adds"
+                          />
 
-                      <div className="wrapper-card-adds-info">
-                        <h1 className="title-card-adds">
-                          {ad?.title?.length > 45
-                            ? `${ad.title.slice(0, 56)}...`
-                            : ad.title}
-                        </h1>
-                        <span className="price-card-adds">
-                          {Number(ad?.price).toLocaleString("cs-CZ", {
-                            style: "currency",
-                            currency: "CZK",
-                            maximumFractionDigits: 0,
-                          })}
-                        </span>
+                          <span className="city">{ad?.city}</span>
+                        </div>
+
+                        <div className="wrapper-card-adds-info">
+                          <h1 className="title-card-adds">
+                            {ad?.title?.length > 45
+                              ? `${ad.title.slice(0, 56)}...`
+                              : ad.title}
+                          </h1>
+                          <span className="price-card-adds">
+                            {Number(ad?.price).toLocaleString("cs-CZ", {
+                              style: "currency",
+                              currency: "CZK",
+                              maximumFractionDigits: 0,
+                            })}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="wrapper-prihlasitse">
-            <h4 className="nejste-prihlaseni">Nejste přihlášeni</h4>
+          ) : (
+            <div className="wrapper-prihlasitse">
+              <h4 className="nejste-prihlaseni">Nejste přihlášeni</h4>
 
-            <Link to="/prihlaseni" className="prihlasitse">
-              Přihlásit se
-            </Link>
-          </div>
-        )}
+              <Link to="/prihlaseni" className="prihlasitse">
+                Přihlásit se
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
