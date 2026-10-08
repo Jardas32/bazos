@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { PiStarDuotone } from "react-icons/pi";
 import Backlink from "../components/BackLink";
+import Cardadds from "../components/Cardadds";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,6 +27,8 @@ function InzeratPage() {
     setQuaryRubrika,
     isAuth,
     API_URL,
+    podobneInzeraty,
+    setPodobneInzeraty,
   } = useBazosContext();
   const { slug, subcategoryslug, id } = useParams();
   const navigate = useNavigate();
@@ -63,6 +66,32 @@ function InzeratPage() {
 
     getAdsbyId();
   }, [id]);
+
+  useEffect(() => {
+    const getPodobneInzeraty = async () => {
+      if (!selectAds?.title) return;
+
+      try {
+        const res = await fetch(
+          `${API_URL}/api/ads/podobne/${encodeURIComponent(selectAds.title)}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+
+        if (res.ok) {
+          const data = await res.json();
+
+          setPodobneInzeraty(data.filter((i) => i.id !== selectAds?.id));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getPodobneInzeraty();
+  }, [selectAds?.title]);
 
   const items = [
     {
@@ -237,6 +266,17 @@ function InzeratPage() {
                       : info.text}
                   </span>
                 </button>
+              ))}
+            </div>
+          </div>
+          <div className="wrapper-podobne-inzeraty">
+            <div className="podobne-inzeraty">
+              <span>Podobné inzeráty</span>
+            </div>
+
+            <div className="wrapper-podobne-grids">
+              {podobneInzeraty.map((inzerat) => (
+                <Cardadds key={inzerat.id} ad={inzerat} />
               ))}
             </div>
           </div>

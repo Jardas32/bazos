@@ -70,6 +70,7 @@ function BazosContext({ children }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalAds, setTotalAds] = useState(0);
   const [openDeleteAds, setOpenDeleteAds] = useState(null);
+  const [podobneInzeraty, setPodobneInzeraty] = useState([]);
 
   const scrollTo = () => {
     window.scrollTo({
@@ -680,6 +681,8 @@ function BazosContext({ children }) {
     scrollTo,
     openDeleteAds,
     setOpenDeleteAds,
+    podobneInzeraty,
+    setPodobneInzeraty,
   };
 
   return (

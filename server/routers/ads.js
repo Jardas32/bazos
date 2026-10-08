@@ -34,6 +34,75 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get("/podobne/:title", async (req, res) => {
+  const { title } = req.params;
+
+  try {
+    const [podobneResult] = await db.query(
+      `SELECT 
+        ads.*,
+        users.name AS seller_name,
+        users.email AS seller_email,
+
+        subcategories.name AS subcategory_name,
+        subcategories.slug AS subcategory_slug,
+
+        categories.name AS category_name,
+        categories.slug AS category_slug,
+
+        JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'id', ad_images.id,
+            'image_url', ad_images.image_url
+          )
+        ) AS images
+
+      FROM ads
+
+      INNER JOIN users
+        ON ads.user_id = users.id
+
+      INNER JOIN subcategories
+        ON ads.subcategory_id = subcategories.id
+
+      INNER JOIN categories
+        ON subcategories.categories_id = categories.id
+
+      LEFT JOIN ad_images
+        ON ad_images.ad_id = ads.id
+
+      WHERE LOWER(ads.title) LIKE ?
+
+      GROUP BY
+        ads.id,
+        ads.title,
+        ads.description,
+        ads.price,
+        ads.city,
+        ads.postal_code,
+        ads.views,
+        ads.created_at,
+        users.name,
+        users.email,
+        subcategories.name,
+        subcategories.slug,
+        categories.name,
+        categories.slug
+
+      ORDER BY ads.created_at DESC
+      `,
+      [`%${title.toLowerCase()}%`]
+    );
+
+    res.status(200).json(podobneResult);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Chyba při hledání podobných inzerátů.",
+    });
+  }
+});
+
 router.get("/category/:categorySlug", async (req, res) => {
   const { categorySlug } = req.params;
 
