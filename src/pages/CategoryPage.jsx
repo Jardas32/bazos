@@ -27,6 +27,7 @@ function CategoryPage() {
     API_URL,
     changeGrid,
     setPages,
+    pages,
     currentPage,
     totalAds,
     setTotalAds,
@@ -74,7 +75,6 @@ function CategoryPage() {
           setTotalAds(dataAds.pagination.total);
           scrollTo();
         }
-        
       } catch (err) {
         console.log(err);
       } finally {
@@ -134,7 +134,7 @@ function CategoryPage() {
             )}
           </div>
 
-          <Paginations />
+          {pages > 1 && <Paginations />}
         </div>
       </div>
     </div>

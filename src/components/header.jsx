@@ -45,7 +45,7 @@ function Header() {
           >
             <img
               className="logo-icon"
-              src="./images/LogoFinal.png"
+              src="/images/LogoFinal.png"
               alt="logo"
             />
           </Link>

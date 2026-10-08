@@ -29,42 +29,42 @@ export const datainzeratinfo = {
     {
       id: 1,
       text: "Všechny inzeráty a hodnocení uživatele",
-      icon: "./images/vshychni.svg",
+      icon: "/images/vshychni.svg",
     },
     {
       id: 2,
       text: "Přidat do oblíbených",
-      icon: "./images/favourite.svg",
+      icon: "/images/favourite.svg",
     },
     {
       id: 3,
       text: "Označit špatný inzerát",
-      icon: "./images/spam.svg",
+      icon: "/images/spam.svg",
     },
     {
       id: 4,
       text: "Označit chybnou kategorii inzerátu",
-      icon: "./images/oznacitcategory.svg",
+      icon: "/images/oznacitcategory.svg",
     },
     {
       id: 5,
       text: "Vytisknout inzerát",
-      icon: "./images/print.svg",
+      icon: "/images/print.svg",
     },
     {
       id: 6,
       text: "Sdílejte na Facebooku",
-      icon: "./images/facebook.svg",
+      icon: "/images/facebook.svg",
     },
     {
       id: 7,
       text: "Doporučit kamarádovi",
-      icon: "./images/doporuceni.svg",
+      icon: "/images/doporuceni.svg",
     },
     {
       id: 8,
       text: "Vyhledat podobné inzeráty",
-      icon: "./images/similar.svg",
+      icon: "/images/similar.svg",
     },
   ],
 };

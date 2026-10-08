@@ -28,6 +28,7 @@ function SubcategoryPage() {
     API_URL,
     changeGrid,
     setPages,
+    pages,
     currentPage,
     totalAds,
     setTotalAds,
@@ -58,9 +59,9 @@ function SubcategoryPage() {
         let url;
 
         if (subcategoryslug || selectKategorie) {
-          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}`;
+          url = `${API_URL}/api/ads/subcategory/${subcategoryslug}?page=${currentPage}`;
         } else {
-          url = `${API_URL}/api/ads/category/${slug}`;
+          url = `${API_URL}/api/ads/category/${slug}?page=${currentPage}`;
         }
 
         const resAds = await fetch(url);
@@ -134,7 +135,7 @@ function SubcategoryPage() {
             )}
           </div>
 
-          <Paginations />
+          {pages > 1 && <Paginations />}
         </div>
       </div>
     </div>

@@ -65,9 +65,11 @@ function BazosContext({ children }) {
     return getSelectbtn ? JSON.parse(getSelectbtn) : changeBtn[1];
   });
 
+  // Paginations
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalAds, setTotalAds] = useState(0);
+  const [openDeleteAds, setOpenDeleteAds] = useState(null);
 
   const scrollTo = () => {
     window.scrollTo({
@@ -207,8 +209,8 @@ function BazosContext({ children }) {
   };
 
   const handleAdsDelete = async (id) => {
-    console.log(id);
     if (!id) return;
+    setLoading(true);
 
     try {
       const res = await fetch(`${API_URL}/api/ads/inzerat/delete/${id}`, {
@@ -225,6 +227,8 @@ function BazosContext({ children }) {
       console.log("Inzerát byl smazán:", data.message);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -674,6 +678,8 @@ function BazosContext({ children }) {
     totalAds,
     setTotalAds,
     scrollTo,
+    openDeleteAds,
+    setOpenDeleteAds,
   };
 
   return (

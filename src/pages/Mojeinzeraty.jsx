@@ -5,6 +5,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import emptyImg from "/images/empty.png";
 import LoadingComponent from "../components/LoadingComponent";
 import Backlink from "../components/BackLink";
+import { MoonLoader } from "react-spinners";
 
 function Mojeinzeraty() {
   const { subcategoryslug } = useParams();
@@ -15,6 +16,9 @@ function Mojeinzeraty() {
     myAds,
     handleAdsDelete,
     authLoading,
+    openDeleteAds,
+    setOpenDeleteAds,
+    loading,
   } = useBazosContext();
 
   if (authLoading) {
@@ -80,10 +84,43 @@ function Mojeinzeraty() {
                       <div className="link-inzeratpage">
                         <div className="wrapper-img-card-adds">
                           <span className="top">TOP</span>
-                          <IoMdCloseCircle
-                            onClick={() => handleAdsDelete(ad?.id)}
-                            className="btn-delete-myinzerat"
-                          />
+
+                          <div className="wrapper-deleteads">
+                            <IoMdCloseCircle
+                              onClick={() => setOpenDeleteAds(ad?.id)}
+                              className={`btn-delete-myinzerat ${
+                                openDeleteAds === ad.id ? "active" : ""
+                              }`}
+                            />
+                            <div
+                              className={`wrapper-popup-deleteads ${
+                                openDeleteAds === ad.id ? "active" : ""
+                              }`}
+                            >
+                              {loading ? (
+                                <div className="wrapper-loading-delete">
+                                  <MoonLoader size={26} color="red" />
+                                </div>
+                              ) : (
+                                <>
+                                  <p>Smazat inzerát?</p>
+                                  <button
+                                    onClick={() => handleAdsDelete(ad.id)}
+                                    className="btn-deleteads"
+                                  >
+                                    Ano
+                                  </button>
+                                  <button
+                                    onClick={() => setOpenDeleteAds(null)}
+                                    className="btn-deleteads"
+                                  >
+                                    Ne
+                                  </button>
+                                </>
+                              )}
+                            </div>
+                          </div>
+
                           <img
                             className="img-card-ads"
                             src={
