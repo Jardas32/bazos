@@ -24,16 +24,22 @@ function CategoryPage() {
     status,
     setStatus,
     selectRubrika,
+    selectKategorie,
     API_URL,
     changeGrid,
     setPages,
     pages,
+    setCurrentPage,
     currentPage,
     totalAds,
     setTotalAds,
     scrollTo,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectRubrika, slug, subcategoryslug, selectKategorie]);
 
   useEffect(() => {
     const getSubCategories = async () => {
@@ -54,8 +60,8 @@ function CategoryPage() {
 
   useEffect(() => {
     const getCategoryAds = async () => {
-      setLoading(true);
       if (!currentPage) return;
+      setLoading(true);
 
       try {
         let url;
@@ -85,7 +91,7 @@ function CategoryPage() {
     };
 
     getCategoryAds();
-  }, [slug, subcategoryslug, currentPage]);
+  }, [slug, subcategoryslug, selectKategorie, currentPage]);
 
   const items = [
     {
