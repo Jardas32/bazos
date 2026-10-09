@@ -285,16 +285,18 @@
   justify-content: center;
 }
 
-@media (max-width: 775px) {
+@media (max-width: 793px) {
   .wrapper-mojeinzeraty {
     padding: 10px;
   }
 
-  .wrapper-oblibene {
-    border: none;
-    padding: 0;
+  .profile {
+    padding-left: 0;
+    border-left: none;
   }
+}
 
+@media (max-width: 775px) {
   .wrapper-myads-grids {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }

@@ -1,8 +1,8 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { changeBtn } from "../data/data";
-// const API_URL = "http://localhost:4000";
-const API_URL = "";
+const API_URL = "http://localhost:4000";
+// const API_URL = "";
 const BazosContextProvider = createContext();
 
 function BazosContext({ children }) {
@@ -448,6 +448,8 @@ function BazosContext({ children }) {
   };
 
   const logout = async () => {
+    setLoading(true);
+
     try {
       const res = await fetch(`${API_URL}/api/auth/logout`, {
         method: "POST",
@@ -462,6 +464,10 @@ function BazosContext({ children }) {
       setError(dataLogout.message);
     } catch (err) {
       console.log(err);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
     }
   };
 

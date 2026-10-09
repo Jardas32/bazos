@@ -23,6 +23,7 @@ function CategoryPage() {
     setLoading,
     status,
     setStatus,
+    setSelectRubrika,
     selectRubrika,
     selectKategorie,
     API_URL,
@@ -36,6 +37,10 @@ function CategoryPage() {
     scrollTo,
   } = useBazosContext();
   const { slug, subcategoryslug } = useParams();
+
+  useEffect(() => {
+    setSelectRubrika(slug);
+  }, [slug]);
 
   useEffect(() => {
     setCurrentPage(1);

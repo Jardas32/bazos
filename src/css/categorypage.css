@@ -80,6 +80,11 @@
     padding: 0;
     border-left: none;
   }
+
+  .wrapper-grid-adds {
+    padding: 0;
+    border: none;
+  }
 }
 
 @media (max-width: 775px) {
@@ -94,11 +99,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-
-  .wrapper-grid-adds {
-    padding: 0;
-    border: none;
   }
 }
 

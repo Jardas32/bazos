@@ -137,7 +137,12 @@ function InzeratPage() {
         </div>
 
         <div className="wrapper-addsinfo">
-          <div className="wrapper-top-title-edd">{selectAds?.title}</div>
+          <div className="wrapper-top-title-edd">
+            {selectAds?.title} -{" "}
+            <span className="data-inzerat">
+              {new Date(selectAds?.created_at).toLocaleDateString()}
+            </span>
+          </div>
 
           <div className="wrapper-inzerat-sliders">
             <Swiper

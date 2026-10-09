@@ -11,6 +11,7 @@ function Prihlaseni() {
     leftBarCategories,
     isLogin,
     isAuth,
+    loading,
     me,
     logout,
     authLoading,
@@ -30,7 +31,7 @@ function Prihlaseni() {
       path: "/",
     },
     {
-      name: "profile",
+      name: `${isAuth ? "profile" : "přihlášení"} `,
     },
   ];
 

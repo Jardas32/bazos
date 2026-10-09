@@ -1,5 +1,5 @@
 import "../css/header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -32,6 +32,8 @@ function Header() {
     handleFilterAds,
   } = useBazosContext();
 
+  const navigate = useNavigate();
+
   return (
     <div className="wrapper-header">
       <div className="wrapper-header-top">
@@ -43,11 +45,7 @@ function Header() {
             }}
             to="/"
           >
-            <img
-              className="logo-icon"
-              src="/images/LogoFinal.png"
-              alt="logo"
-            />
+            <img className="logo-icon" src="/images/LogoFinal.png" alt="logo" />
           </Link>
         </div>
 
@@ -58,7 +56,10 @@ function Header() {
           >
             {me ? `${me?.name}` : `Přihlášení`}
           </Link>
-          <Link className="nav-link" to="/oblibene">
+          <Link
+            className="nav-link"
+            to={`${isAuth ? "/oblibene" : "/prihlaseni"} `}
+          >
             Oblíbené inzeráty
           </Link>
           <Link className="nav-link" to="/mojeinzeraty">

@@ -1,14 +1,19 @@
 import "../css/oblibene.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useBazosContext } from "../context/BazosContext";
-import { useParams } from "react-router-dom";
 import LoadingComponent from "../components/LoadingComponent";
 import BackLink from "../components/BackLink";
 
 function Oblibene() {
   const { subcategoryslug } = useParams();
-  const { setQuaryRubrika, leftBarCategories, myFavorites, authLoading } =
-    useBazosContext();
+  const {
+    isAuth,
+    setQuaryRubrika,
+    leftBarCategories,
+    myFavorites,
+    authLoading,
+  } = useBazosContext();
+  const navigate = useNavigate();
 
   if (authLoading) {
     return <LoadingComponent />;
